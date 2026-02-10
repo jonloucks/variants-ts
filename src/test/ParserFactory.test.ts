@@ -2,8 +2,7 @@ import { ParserFactory, guard, CONTRACT as PARSER_FACTORY_CONTRACT } from "@jonl
 
 import { assertContract, assertGuard } from "./helper.test";
 import { Installer } from "@jonloucks/variants-ts/api/Installer";
-import { CONTRACTS } from "@jonloucks/variants-ts/auxiliary/Convenience";
-import { AutoClose, Contracts } from "@jonloucks/contracts-ts";
+import { AutoClose, Contracts, CONTRACTS } from "@jonloucks/contracts-ts";
 import { createInstaller } from "@jonloucks/variants-ts";
 
 const FUNCTION_NAMES: (string | symbol)[] = [
