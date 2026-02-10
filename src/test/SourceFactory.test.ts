@@ -6,6 +6,7 @@ import { CONTRACT, SourceFactory, guard } from "@jonloucks/variants-ts/api/Sourc
 import { ok } from "node:assert";
 import { assertContract, assertGuard } from "./helper.test";
 import { ValueType } from "../auxiliary/Convenience";
+import { used } from "@jonloucks/badges-ts/auxiliary/Checks";
 
 const FUNCTION_NAMES: (string | symbol)[] = [
   'createKeySource',
@@ -98,7 +99,7 @@ describe('SourceFactory Suite', () => {
     });
 
     it('should handle lookup returning undefined', () => {
-      const lookup = (key: string): undefined => undefined;
+      const lookup = (key: string): undefined => { used(key); return undefined; };
       const source = factory.createLookupSource(lookup);
       expect(source.getSourceValue('any')).toBeUndefined();
     });
