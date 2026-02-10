@@ -26,7 +26,7 @@ describe('Variant Suite', () => {
 
   const FUNCTION_NAMES: (string | symbol)[] = [
     'name', 'keys', 'description', 'fallback', 'link', 'of'
-  ]
+  ];
 
   function createVariant<T>(config?: VariantConfig<T>): RequiredType<Variant<T>> {
     return factory.createVariant(config);
