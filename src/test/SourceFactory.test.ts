@@ -11,7 +11,8 @@ const FUNCTION_NAMES: (string | symbol)[] = [
   'createKeySource',
   'createMapSource',
   'createRecordSource',
-  'createProcessSource'
+  'createProcessSource',
+  'createLookupSource',
 ];
 
 assertGuard(guard, ...FUNCTION_NAMES);
