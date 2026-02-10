@@ -1,10 +1,10 @@
 import { ok } from "node:assert";
 
-import { 
-  VERSION, 
-  RequiredType,
-  OptionalType,
-  VariantException
+import {
+  VERSION,
+  BOOTSTRAPPED,
+  Installer,
+  InstallerConfig
 } from "@jonloucks/variants-ts";
 import { used } from "@jonloucks/variants-ts/auxiliary/Checks";
 
@@ -17,17 +17,18 @@ import { used } from "@jonloucks/variants-ts/auxiliary/Checks";
  */
 
 describe('variants-ts/api Index exports', () => {
+  let installer: Installer | undefined  = undefined;
+  let installerConfig: InstallerConfig | undefined = undefined;
   it('should export all expected members', () => {
     ok(VERSION.length > 0, 'VERSION should be exported and non-empty');
-    assertNothing(null as OptionalType<VariantException>);
-    ok(new VariantException('Test').message === 'Test', 'VariantException should be exported and constructible');
-    assertNothing(null as OptionalType<RequiredType<unknown>>);
-    assertNothing(null as OptionalType<OptionalType<unknown>>);
     ok(true, 'All exports are accessible'); // If we reach here, exports are accessible
+    ok(BOOTSTRAPPED, 'BOOTSTRAPPED should be exported and accessible');
+    assertNothing(installer);
+    assertNothing(installerConfig);
   });
 });
 
-function assertNothing(value: OptionalType<unknown>): void {
+function assertNothing(value: unknown | undefined): void {
   used(value);
   ok(true, 'This function is only for compile-time type checking and should never be called at runtime');
 }
