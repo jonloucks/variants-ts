@@ -1,46 +1,47 @@
 import { AutoClose, CONTRACTS, Contracts, isPresent, RequiredType } from "@jonloucks/contracts-ts";
-import { Environment, guard } from "@jonloucks/variants-ts/api/Environment";
+import { Environment, guard, Config as EnvironmentConfig } from "@jonloucks/variants-ts/api/Environment";
 import { CONTRACT, EnvironmentFactory } from "@jonloucks/variants-ts/api/EnvironmentFactory";
+import { Installer } from "@jonloucks/variants-ts/api/Installer";
 import { Source } from "@jonloucks/variants-ts/api/Source";
 import { Variant } from "@jonloucks/variants-ts/api/Variant";
 import { VariantException } from "@jonloucks/variants-ts/api/VariantException";
 import { assertGuard, mockDuck } from "@jonloucks/variants-ts/test/helper.test";
 import { deepStrictEqual, ok, strictEqual } from "node:assert";
-
-// temporary until we have a better way to manage test dependencies
-import { ValueType } from "../api/Types";
-import { used } from "../auxiliary/Checks";
-import { create as createFactory } from "../impl/EnvironmentFactory.impl";
-import { create as createVariant } from "../impl/Variant.impl";
+import { ValueType } from "@jonloucks/variants-ts/api/Types";
+import { used } from "@jonloucks/variants-ts/auxiliary/Checks";
+import { createInstaller } from "@jonloucks/variants-ts";
+import { VariantFactory, CONTRACT as VARIANT_FACTORY_CONTRACT } from "@jonloucks/variants-ts/api/VariantFactory";
 
 const FUNCTION_NAMES: (string | symbol)[] = [
-  'getVariance', 'findVariance'
+  'getVariance',
+  'findVariance'
 ];
 
 assertGuard(guard, ...FUNCTION_NAMES);
 
 describe('Environment Suite', () => {
   let contracts: Contracts = CONTRACTS;
+  let installer: Installer;
+  let closeInstaller: AutoClose;
   let factory: EnvironmentFactory;
-  let closeBind: AutoClose;
+  let variantFactory: VariantFactory;
+
+  beforeEach(() => {
+    installer = createInstaller({ contracts: contracts });
+    closeInstaller = installer.open();
+    factory = contracts.enforce(CONTRACT);
+    variantFactory = contracts.enforce(VARIANT_FACTORY_CONTRACT);
+  });
+
+  afterEach(() => {
+    closeInstaller.close();
+  });
 
   const createMockSource = (data: Record<string, string>): Source => {
     return {
       getSourceValue: (key: string) => data[key]
     };
   };
-
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  type EnvironmentConfig = any;
-
-  beforeEach(() => {
-    closeBind = contracts.bind(CONTRACT, createFactory);
-    factory = contracts.enforce(CONTRACT);
-  });
-
-  afterEach(() => {
-    closeBind.close();
-  });
 
   function createEnvironment(config?: EnvironmentConfig): Environment {
     return factory.createEnvironment(config);
@@ -87,7 +88,7 @@ describe('Environment Suite', () => {
         const env: Environment = createEnvironment({
           sources: [source]
         });
-        const variant: Variant<string> = createVariant({
+        const variant: Variant<string> = variantFactory.createVariant({
           keys: ['APP_NAME'],
           name: 'appName'
         });
@@ -101,7 +102,7 @@ describe('Environment Suite', () => {
         const env: Environment = createEnvironment({
           sources: [source]
         });
-        const variant: Variant<string> = createVariant({
+        const variant: Variant<string> = variantFactory.createVariant({
           keys: ['APP_NAME'],
           name: 'appName'
         });
@@ -118,7 +119,7 @@ describe('Environment Suite', () => {
         const env: Environment = createEnvironment({
           sources: [source]
         });
-        const variant: Variant<string> = createVariant({
+        const variant: Variant<string> = variantFactory.createVariant({
           keys: ['PRIMARY_KEY', 'SECONDARY_KEY']
         });
 
@@ -131,7 +132,7 @@ describe('Environment Suite', () => {
         const env: Environment = createEnvironment({
           sources: [source]
         });
-        const variant: Variant<string> = createVariant({
+        const variant: Variant<string> = variantFactory.createVariant({
           keys: ['APP_NAME'],
           fallback: 'DefaultApp'
         });
@@ -145,7 +146,7 @@ describe('Environment Suite', () => {
         const env: Environment = createEnvironment({
           sources: [source]
         });
-        const variant: Variant<number> = createVariant({
+        const variant: Variant<number> = variantFactory.createVariant({
           keys: ['PORT'],
           parser: {
             transform: (input: string) => parseInt(input, 10)
@@ -161,7 +162,7 @@ describe('Environment Suite', () => {
         const env: Environment = createEnvironment({
           sources: [source]
         });
-        const variant: Variant<number> = createVariant<number>({
+        const variant: Variant<number> = variantFactory.createVariant<number>({
           keys: ['INVALID'],
           parser: {
             transform: (input: string): RequiredType<number> => {
@@ -183,7 +184,7 @@ describe('Environment Suite', () => {
         const env: Environment = createEnvironment({
           sources: [source1, source2]
         });
-        const variant: Variant<string> = createVariant({
+        const variant: Variant<string> = variantFactory.createVariant({
           keys: ['KEY']
         });
 
@@ -197,7 +198,7 @@ describe('Environment Suite', () => {
         const env: Environment = createEnvironment({
           sources: [source1, source2]
         });
-        const variant: Variant<string> = createVariant({
+        const variant: Variant<string> = variantFactory.createVariant({
           keys: ['KEY']
         });
 
@@ -212,7 +213,7 @@ describe('Environment Suite', () => {
         const env: Environment = createEnvironment({
           sources: [source1, source2, source3]
         });
-        const variant: Variant<string> = createVariant({
+        const variant: Variant<string> = variantFactory.createVariant({
           keys: ['KEY']
         });
 
@@ -226,7 +227,7 @@ describe('Environment Suite', () => {
         const env: Environment = createEnvironment({
           sources: [source1, source2]
         });
-        const variant: Variant<string> = createVariant({
+        const variant: Variant<string> = variantFactory.createVariant({
           keys: ['KEY'],
           fallback: 'DefaultValue'
         });
@@ -243,10 +244,10 @@ describe('Environment Suite', () => {
         const env: Environment = createEnvironment({
           sources: [source]
         });
-        const linkedVariant: Variant<string> = createVariant({
+        const linkedVariant: Variant<string> = variantFactory.createVariant({
           fallback: 'LinkedDefault'
         });
-        const variant: Variant<string> = createVariant({
+        const variant: Variant<string> = variantFactory.createVariant({
           keys: ['KEY'],
           link: linkedVariant
         });
@@ -260,10 +261,10 @@ describe('Environment Suite', () => {
         const env: Environment = createEnvironment({
           sources: [source]
         });
-        const linkedVariant: Variant<string> = createVariant({
+        const linkedVariant: Variant<string> = variantFactory.createVariant({
           keys: ['LINKED_KEY']
         });
-        const variant: Variant<string> = createVariant({
+        const variant: Variant<string> = variantFactory.createVariant({
           keys: ['PRIMARY_KEY'],
           link: linkedVariant
         });
@@ -277,13 +278,13 @@ describe('Environment Suite', () => {
         const env: Environment = createEnvironment({
           sources: [source]
         });
-        const baseVariant: Variant<number> = createVariant({
+        const baseVariant: Variant<number> = variantFactory.createVariant({
           fallback: 100
         });
-        const middleVariant: Variant<number> = createVariant({
+        const middleVariant: Variant<number> = variantFactory.createVariant({
           link: baseVariant
         });
-        const topVariant: Variant<number> = createVariant({
+        const topVariant: Variant<number> = variantFactory.createVariant({
           keys: ['MISSING'],
           link: middleVariant
         });
@@ -297,10 +298,10 @@ describe('Environment Suite', () => {
         const env: Environment = createEnvironment({
           sources: [source]
         });
-        const linkedVariant: Variant<string> = createVariant({
+        const linkedVariant: Variant<string> = variantFactory.createVariant({
           fallback: 'from_link'
         });
-        const variant: Variant<string> = createVariant({
+        const variant: Variant<string> = variantFactory.createVariant({
           keys: ['KEY'],
           link: linkedVariant
         });
@@ -317,7 +318,7 @@ describe('Environment Suite', () => {
         const env: Environment = createEnvironment({
           sources: [source]
         });
-        const variant: Variant<number[]> = createVariant({
+        const variant: Variant<number[]> = variantFactory.createVariant({
           keys: ['NUMBERS'],
           parser: {
             transform: (input: string) => input.split(',').map(s => parseInt(s, 10))
@@ -339,7 +340,7 @@ describe('Environment Suite', () => {
         const env: Environment = createEnvironment({
           sources: [source]
         });
-        const variant: Variant<{ debug: boolean; port: number }> = createVariant({
+        const variant: Variant<{ debug: boolean; port: number }> = variantFactory.createVariant({
           keys: ['CONFIG'],
           parser: {
             transform: (input: string) => JSON.parse(input)
@@ -357,7 +358,7 @@ describe('Environment Suite', () => {
 
       it('should return undefined when environment has no sources', () => {
         const env: Environment = createEnvironment();
-        const variant: Variant<string> = createVariant({
+        const variant: Variant<string> = variantFactory.createVariant({
           keys: ['ANY_KEY']
         });
 
@@ -370,7 +371,7 @@ describe('Environment Suite', () => {
         const env: Environment = createEnvironment({
           sources: [source]
         });
-        const variant: Variant<string> = createVariant();
+        const variant: Variant<string> = variantFactory.createVariant();
 
         const result = env.findVariance(variant);
         strictEqual(result, undefined, 'should return undefined');
@@ -385,7 +386,7 @@ describe('Environment Suite', () => {
       const env: Environment = createEnvironment({
         sources: [source]
       });
-      const variant: Variant<string> = createVariant({
+      const variant: Variant<string> = variantFactory.createVariant({
         keys: ['KEY']
       });
 
@@ -398,7 +399,7 @@ describe('Environment Suite', () => {
       const env: Environment = createEnvironment({
         sources: [source]
       });
-      const variant: Variant<string> = createVariant({
+      const variant: Variant<string> = variantFactory.createVariant({
         keys: ['KEY'],
         fallback: 'default'
       });
@@ -412,7 +413,7 @@ describe('Environment Suite', () => {
       const env: Environment = createEnvironment({
         sources: [source]
       });
-      const variant: Variant<string> = createVariant({
+      const variant: Variant<string> = variantFactory.createVariant({
         keys: ['MISSING_KEY'],
         name: 'TestVariant'
       });
@@ -430,7 +431,7 @@ describe('Environment Suite', () => {
       const env: Environment = createEnvironment({
         sources: [source]
       });
-      const variant: Variant<string> = createVariant({
+      const variant: Variant<string> = variantFactory.createVariant({
         keys: ['KEY'],
         name: 'MyVariant'
       });
@@ -449,7 +450,7 @@ describe('Environment Suite', () => {
       const env: Environment = createEnvironment({
         sources: [source]
       });
-      const variant: Variant<number> = createVariant({
+      const variant: Variant<number> = variantFactory.createVariant({
         keys: ['COUNT'],
         parser: {
           transform: (input: string) => parseInt(input, 10)
@@ -465,7 +466,7 @@ describe('Environment Suite', () => {
       const env: Environment = createEnvironment({
         sources: [source]
       });
-      const variant: Variant<number> = createVariant<number>({
+      const variant: Variant<number> = variantFactory.createVariant<number>({
         keys: ['INVALID'],
         parser: {
           transform: (input: ValueType): RequiredType<number> => {
@@ -493,7 +494,7 @@ describe('Environment Suite', () => {
       const env: Environment = createEnvironment({
         sources: [source1, source2]
       });
-      const variant: Variant<string> = createVariant({
+      const variant: Variant<string> = variantFactory.createVariant({
         keys: ['PRIMARY_KEY', 'SECONDARY_KEY', 'TERTIARY_KEY']
       });
 
@@ -518,7 +519,7 @@ describe('Environment Suite', () => {
       const env: Environment = createEnvironment({
         sources: [source]
       });
-      const variant: Variant<AppConfig> = createVariant({
+      const variant: Variant<AppConfig> = variantFactory.createVariant({
         keys: ['APP_CONFIG'],
         parser: {
           transform: (input: string) => JSON.parse(input) as AppConfig
@@ -537,13 +538,13 @@ describe('Environment Suite', () => {
         sources: [source]
       });
 
-      const level3: Variant<number> = createVariant({
+      const level3: Variant<number> = variantFactory.createVariant({
         fallback: 300
       });
-      const level2: Variant<number> = createVariant({
+      const level2: Variant<number> = variantFactory.createVariant({
         link: level3
       });
-      const level1: Variant<number> = createVariant({
+      const level1: Variant<number> = variantFactory.createVariant({
         keys: ['KEY'],
         link: level2
       });
@@ -556,7 +557,7 @@ describe('Environment Suite', () => {
       const env: Environment = createEnvironment({
         sources: []
       });
-      const variant: Variant<string> = createVariant({
+      const variant: Variant<string> = variantFactory.createVariant({
         keys: ['KEY'],
         fallback: 'default'
       });
@@ -571,7 +572,7 @@ describe('Environment Suite', () => {
       const env: Environment = createEnvironment({
         sources: [source1, source2]
       });
-      const variant: Variant<string> = createVariant({
+      const variant: Variant<string> = variantFactory.createVariant({
         keys: ['KEY']
       });
 
@@ -584,7 +585,7 @@ describe('Environment Suite', () => {
       const env: Environment = createEnvironment({
         sources: [source]
       });
-      const variant: Variant<string> = createVariant({
+      const variant: Variant<string> = variantFactory.createVariant({
         fallback: 'fallback_value'
       });
 

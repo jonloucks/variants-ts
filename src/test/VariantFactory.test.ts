@@ -1,34 +1,35 @@
 import { ok } from "node:assert";
 
-import { CONTRACT, VariantFactory, guard } from "@jonloucks/variants-ts/api/VariantFactory";
+import { VariantFactory, guard, CONTRACT as VARIANT_FACTORY_CONTRACT } from "@jonloucks/variants-ts/api/VariantFactory";
 import { Variant } from "@jonloucks/variants-ts/api/Variant";
 import { AutoClose } from "@jonloucks/contracts-ts/api/AutoClose";
 import { assertContract, assertGuard, mockDuck } from "./helper.test";
 import { isPresent } from "@jonloucks/contracts-ts/api/Types";
 import { Contracts, CONTRACTS } from "@jonloucks/contracts-ts";
-
-// temporary until we have a better way to manage test dependencies
-import { create as createFactory } from "../impl/VariantFactory.impl";
+import { Installer, createInstaller } from "@jonloucks/variants-ts";
 
 const FUNCTION_NAMES: (string | symbol)[] = [
   'createVariant'
 ];
 
 assertGuard(guard, ...FUNCTION_NAMES);
-assertContract(CONTRACT, 'VariantFactory');
+assertContract(VARIANT_FACTORY_CONTRACT, 'VariantFactory');
 
 describe('VariantFactory Suite', () => {
+
   let contracts: Contracts = CONTRACTS;
-  let factory: VariantFactory;
-  let closeBind: AutoClose;
+  let installer: Installer;
+  let closeInstaller: AutoClose;
+  let variantFactory: VariantFactory;
 
   beforeEach(() => {
-    closeBind = contracts.bind(CONTRACT, createFactory);
-    factory = contracts.enforce(CONTRACT);
+    installer = createInstaller({ contracts: contracts });
+    closeInstaller = installer.open();
+    variantFactory = contracts.enforce(VARIANT_FACTORY_CONTRACT);
   });
 
   afterEach(() => {
-    closeBind.close();
+    closeInstaller.close();
   });
 
   it('isVariantFactory should return true for VariantFactory', () => {
@@ -37,7 +38,7 @@ describe('VariantFactory Suite', () => {
   });
 
   it('createVariant with empty config should create a Variant', () => {
-    const variant: Variant<Date> = factory.createVariant<Date>();
+    const variant: Variant<Date> = variantFactory.createVariant<Date>();
     ok(isPresent(variant), 'createVariant with config should create a Variant');
     ok(isPresent(variant.keys), 'Variant should have keys');
     ok(Array.isArray(variant.keys), 'Variant keys should be an array');

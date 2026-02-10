@@ -1,9 +1,10 @@
-import { CONTRACT, ParserFactory, guard } from "@jonloucks/variants-ts/api/ParserFactory";
+import { ParserFactory, guard, CONTRACT as PARSER_FACTORY_CONTRACT } from "@jonloucks/variants-ts/api/ParserFactory";
 
-// temporary until we have a better testing strategy for the implementation details of ParserFactory
-import { create as createFactory } from "../impl/ParserFactory.impl";
 import { assertContract, assertGuard } from "./helper.test";
-
+import { Installer } from "@jonloucks/variants-ts/api/Installer";
+import { CONTRACTS } from "@jonloucks/variants-ts/auxiliary/Convenience";
+import { AutoClose, Contracts } from "@jonloucks/contracts-ts";
+import { createInstaller } from "@jonloucks/variants-ts";
 
 const FUNCTION_NAMES: (string | symbol)[] = [
   'stringParser',
@@ -22,14 +23,22 @@ const FUNCTION_NAMES: (string | symbol)[] = [
 ];
 
 assertGuard(guard, ...FUNCTION_NAMES);
-assertContract(CONTRACT, 'ParserFactory');
+assertContract(PARSER_FACTORY_CONTRACT, 'ParserFactory');
 
 describe("ParserFactory", () => {
-
+  let contracts: Contracts = CONTRACTS;
+  let installer: Installer;
+  let closeInstaller: AutoClose;
   let parserFactory: ParserFactory;
 
   beforeEach(() => {
-    parserFactory = createFactory();
+    installer = createInstaller({ contracts: contracts });
+    closeInstaller = installer.open();
+    parserFactory = contracts.enforce(PARSER_FACTORY_CONTRACT);
+  });
+
+  afterEach(() => {
+    closeInstaller.close();
   });
 
   test("should create a ParserFactory instance", () => {

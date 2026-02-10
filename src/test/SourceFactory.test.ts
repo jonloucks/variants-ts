@@ -2,7 +2,7 @@ import { CONTRACTS } from "@jonloucks/contracts-ts";
 import { AutoClose } from "@jonloucks/contracts-ts/api/AutoClose";
 import { Contracts } from "@jonloucks/contracts-ts/api/Contracts";
 import { Installer, createInstaller } from "@jonloucks/variants-ts";
-import { CONTRACT, SourceFactory, guard } from "@jonloucks/variants-ts/api/SourceFactory";
+import { SourceFactory, guard, CONTRACT as SOURCE_FACTORY_CONTRACT } from "@jonloucks/variants-ts/api/SourceFactory";
 import { ok } from "node:assert";
 import { assertContract, assertGuard } from "./helper.test";
 import { ValueType } from "../auxiliary/Convenience";
@@ -17,7 +17,7 @@ const FUNCTION_NAMES: (string | symbol)[] = [
 ];
 
 assertGuard(guard, ...FUNCTION_NAMES);
-assertContract(CONTRACT, 'SourceFactory');
+assertContract(SOURCE_FACTORY_CONTRACT, 'SourceFactory');
 
 describe('SourceFactory Suite', () => {
   let contracts: Contracts = CONTRACTS;
@@ -26,9 +26,9 @@ describe('SourceFactory Suite', () => {
   let factory: SourceFactory;
 
   beforeEach(() => {
-    installer = createInstaller({ contracts: CONTRACTS });
+    installer = createInstaller({ contracts: contracts });
     closeInstaller = installer.open();
-    factory = contracts.enforce(CONTRACT);
+    factory = contracts.enforce(SOURCE_FACTORY_CONTRACT);
   });
 
   afterEach(() => {
