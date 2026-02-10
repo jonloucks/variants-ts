@@ -2,20 +2,6 @@ import type { OptionalType, RequiredType } from "@jonloucks/contracts-ts/api/Typ
 import { configCheck, illegalCheck, presentCheck, used } from "@jonloucks/contracts-ts/auxiliary/Checks";
 import { ValueType as T } from "@jonloucks/variants-ts/api/Types";
 
-export {
-  configCheck,
-  illegalCheck,
-  parserCheck,
-  presentCheck,
-  used,
-  valueCheck,
-  keyCheck
-};
-
-export type {
-  OptionalType, RequiredType, T as ValueType
-};
-
 const valueCheck: <ValueType>(value: OptionalType<ValueType>)
   => RequiredType<ValueType>
   = <ValueType>(value: OptionalType<ValueType>) => {
@@ -33,6 +19,20 @@ const keyCheck: (value: OptionalType<string>)
   = (value: OptionalType<string>) => {
     return presentCheck(value, "Key must be present.");
   }
+
+export {
+  configCheck,
+  illegalCheck,
+  parserCheck,
+  presentCheck,
+  used,
+  valueCheck,
+  keyCheck
+};
+
+export type {
+  OptionalType, RequiredType, T as ValueType
+};
 
 
 
