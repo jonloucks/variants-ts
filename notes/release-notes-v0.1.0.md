@@ -17,7 +17,7 @@ npm install @jonloucks/variants-ts@0.1.0
 
 *   Performance: None
 *   Compatibility: None
-*   Documentation: None
+*   Documentation: Added DOCUMENTATION.md and expanded README usage examples.
 
 ## 🐛 Bug Fixes
 *  None 

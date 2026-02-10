@@ -7,16 +7,17 @@
 [![Typedoc Badge](https://raw.githubusercontent.com/jonloucks/variants-ts/refs/heads/variants/main-typedoc.svg)](https://jonloucks.github.io/variants-ts/typedoc/)
 
 
-Typescript Configuration Library, normalize how configuration is loaded from various sources is retrieved.
+TypeScript configuration library that normalizes how values are loaded from multiple sources.
 
 ## Documentation
-* [License](LICENSE.md)
+* [Documentation](DOCUMENTATION.md)
+* [License](LICENSE)
 * [Contributing](CONTRIBUTING.md)
 * [Code of conduct](CODE_OF_CONDUCT.md)
 * [Coding standards](CODING_STANDARDS.md)
 * [Security policy](SECURITY.md)
 * [Pull request template](PULL_REQUEST_TEMPLATE.md)
-* [How to use API](https://jonloucks.github.io/variants-ts/typedoc/)
+* [TypeDoc API](https://jonloucks.github.io/variants-ts/typedoc/)
 * [Test coverage report](https://jonloucks.github.io/variants-ts/lcov-report)
 
 ## Installation
@@ -30,8 +31,13 @@ npm install @jonloucks/variants-ts
 <details markdown="1"><summary>Importing the Package</summary>
 
 ```typescript
-import { 
-  } from '@jonloucks/variants-ts';
+import {
+  BOOTSTRAPPED,
+  VERSION,
+  createInstaller,
+  type Installer,
+  type InstallerConfig
+} from '@jonloucks/variants-ts';
 ```
 
 </details>
@@ -40,28 +46,43 @@ import {
 
 ```typescript
 import {
-} from "@jonloucks/variants-ts/api/Convenience";
+  createEnvironment,
+  createProcessSource,
+  createRecordSource,
+  createVariant,
+  CONTRACTS
+} from "@jonloucks/variants-ts/auxiliary/Convenience";
 ```
 
 </details>
 
-<details markdown="1"><summary>Creating a Contract</summary>
+<details markdown="1"><summary>Creating a Variant</summary>
 
 ```typescript
-
+const portVariant = createVariant<string>({
+  name: "server.port",
+  keys: ["PORT"],
+  fallback: "3000"
+});
 ```
 </details>
 
-<details markdown="1"><summary>Binding a Contract</summary>
+<details markdown="1"><summary>Creating Sources</summary>
 
 ```typescript
-
+const processSource = createProcessSource();
+const recordSource = createRecordSource({ PORT: "8080" });
 ```
 </details>
 
-<details markdown="1"><summary>Using the Contract</summary>
+<details markdown="1"><summary>Using the Environment</summary>
 
 ```typescript
+const env = createEnvironment({
+  sources: [processSource, recordSource]
+});
+
+const port = env.getVariance(portVariant);
 ```
 </details>
 
