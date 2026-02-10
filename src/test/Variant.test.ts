@@ -474,9 +474,9 @@ describe('Variant Suite', () => {
           }
         });
 
-        const result = variant.of('2026-02-09');
+        const result = variant.of('2100-02-09');
         ok(result instanceof Date, 'result should be a Date');
-        strictEqual(result?.getFullYear(), 2026, 'year should be 2026');
+        strictEqual(result?.getFullYear(), 2100, 'year should be 2100');
       });
     });
   });
