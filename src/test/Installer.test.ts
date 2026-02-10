@@ -18,7 +18,7 @@ describe('Installer tests', () => {
     autoClose.close(); // Ensure we call close to clean up any resources if needed
   });
 
-  it('if AutoOpen is implemented, autoOpen should return an AutoClose', () => {
+  it('if AutoOpen is provided, autoOpen should return an AutoClose', () => {
     const installer: Installer = createInstaller();
     if (guardAutoOpen(installer)) {
       const autoClose: AutoClose = installer.autoOpen();
@@ -26,7 +26,7 @@ describe('Installer tests', () => {
       ok(typeof autoClose.close === 'function', 'AutoClose instance should have a close method');
       autoClose.close(); // Ensure we call close to clean up any resources if needed
     } else {
-      ok(true, 'Installer does not implement AutoOpen, skipping test');
+      ok(true, 'Installer does not provide AutoOpen, skipping test');
     }
   }); 
 });

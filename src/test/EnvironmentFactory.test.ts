@@ -1,32 +1,33 @@
 import { ok } from "node:assert";
 
 import { AutoClose, Contracts, CONTRACTS, isPresent } from "@jonloucks/contracts-ts";
-import { CONTRACT, EnvironmentFactory, guard } from "@jonloucks/variants-ts/api/EnvironmentFactory";
+import { EnvironmentFactory, guard, CONTRACT as ENVIRONMENT_FACTORY_CONTRACT } from "@jonloucks/variants-ts/api/EnvironmentFactory";
 import { Environment } from "@jonloucks/variants-ts/api/Environment";
+import { Installer } from "@jonloucks/variants-ts/api/Installer";
 import { assertContract, assertGuard, mockDuck } from "@jonloucks/variants-ts/test/helper.test";
-
-// temporary until we have a better way to manage test dependencies
-import { create as createFactory } from "../impl/EnvironmentFactory.impl";
+import { createInstaller } from "@jonloucks/variants-ts";
 
 const FUNCTION_NAMES: (string | symbol)[] = [
   'createEnvironment'
 ];
 
 assertGuard(guard, ...FUNCTION_NAMES);
-assertContract(CONTRACT, 'EnvironmentFactory');
+assertContract(ENVIRONMENT_FACTORY_CONTRACT, 'EnvironmentFactory');
 
 describe('EnvironmentFactory Suite', () => {
   let contracts: Contracts = CONTRACTS;
+  let installer: Installer;
+  let closeInstaller: AutoClose;
   let factory: EnvironmentFactory;
-  let closeBind: AutoClose;
 
   beforeEach(() => {
-    closeBind = contracts.bind(CONTRACT, createFactory);
-    factory = contracts.enforce(CONTRACT);
+    installer = createInstaller({ contracts: contracts });
+    closeInstaller = installer.open();
+    factory = contracts.enforce(ENVIRONMENT_FACTORY_CONTRACT);
   });
 
   afterEach(() => {
-    closeBind.close();
+    closeInstaller.close();
   });
 
   it('isEnvironmentFactory should return true for EnvironmentFactory', () => {
