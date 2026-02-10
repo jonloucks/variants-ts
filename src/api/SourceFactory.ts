@@ -37,9 +37,11 @@ export interface SourceFactory {
 export function guard(instance: unknown): instance is RequiredType<SourceFactory> {
   return guardFunctions(instance,
     'createKeySource',
+    'createLookupSource',
     'createMapSource',
     'createRecordSource',
-    'createProcessSource');
+    'createProcessSource'
+  );
 }
 
 /**

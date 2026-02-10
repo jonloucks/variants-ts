@@ -10,10 +10,10 @@ import { used } from "@jonloucks/badges-ts/auxiliary/Checks";
 
 const FUNCTION_NAMES: (string | symbol)[] = [
   'createKeySource',
+  'createLookupSource',
   'createMapSource',
   'createRecordSource',
-  'createProcessSource',
-  'createLookupSource',
+  'createProcessSource'
 ];
 
 assertGuard(guard, ...FUNCTION_NAMES);
@@ -26,7 +26,7 @@ describe('SourceFactory Suite', () => {
   let factory: SourceFactory;
 
   beforeEach(() => {
-    installer = createInstaller({ contracts: CONTRACTS});
+    installer = createInstaller({ contracts: CONTRACTS });
     closeInstaller = installer.open();
     factory = contracts.enforce(CONTRACT);
   });
@@ -165,7 +165,7 @@ describe('SourceFactory Suite', () => {
     });
 
     it('should handle map with various value types', () => {
-      const map = new Map<string,ValueType>([
+      const map = new Map<string, ValueType>([
         ['string', 'text'],
         ['number', 42],
         ['boolean', true]
