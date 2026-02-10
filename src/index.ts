@@ -14,6 +14,11 @@ import { VERSION } from "./version";
 
 import { create as createInstaller } from "./impl/Installer.impl";
 
+const BOOTSTRAPPED = ((): boolean => {
+  createInstaller().open(); // currently there is nothing to clean up
+  return true;
+})();
+
 export type {
   Installer, 
   InstallerConfig,
@@ -24,8 +29,3 @@ export {
   VERSION,
   BOOTSTRAPPED
 };
-
-const BOOTSTRAPPED = ((): boolean => {
-  createInstaller().open(); // currently there is nothing to clean up
-  return true;
-})();
