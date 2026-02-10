@@ -1,6 +1,6 @@
 {
   "name": "@jonloucks/variants-ts",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Node.js Typescript Configuration Library, normalize how configuration is loaded from various sources is retrieved.",
   "private": true,
   "main": "index.js",
@@ -40,7 +40,7 @@
     "lint": "eslint . --ext .ts",
     "lint:fix": "eslint . --ext .ts --fix",
     "prepublishOnly": "npm run build",
-    "before:publish": "npm run clean && npm run compile && cp package.json dist && cp README.md dist && mkdir -p dist/data && cp src/data/* dist/data/ && cd dist && npm pkg delete private",
+    "before:publish": "npm run clean && npm run compile && cp package.json dist && cp README.md dist && cd dist && npm pkg delete private",
     "after:publish": "npm run clean",
     "prepare": "npm run build",
     "docs": "typedoc --options typedoc.json",
