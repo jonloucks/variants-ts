@@ -4,7 +4,7 @@ import { OptionalType } from "@jonloucks/variants-ts/api/Types";
 import { presentCheck, used } from "@jonloucks/variants-ts/auxiliary/Checks";
 
 /** 
- * Tests for @jonloucks/badges-ts/auxiliary exports
+ * Tests for @jonloucks/variants-ts/auxiliary exports
  * All exported functions and constants must already have been tested in their respective test files
  * These tests ensure that the index exports are correctly set up and accessible
  * If this file fails to compile, it indicates a possible breaking for deployment consumers
