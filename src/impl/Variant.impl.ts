@@ -72,7 +72,7 @@ function compileOf<T>(config: VariantConfig<T>): Transform<OptionalType<ValueTyp
   } else if (isPresent(config.parser)) {
     return compileUsingParser();
   } else {
-    return complePassThru();
+    return compilePassThru();
   }
 
   function compileUsingParser(): Transform<OptionalType<ValueType>, OptionalType<T>> {
@@ -87,7 +87,7 @@ function compileOf<T>(config: VariantConfig<T>): Transform<OptionalType<ValueTyp
     };
   }
 
-  function complePassThru(): Transform<OptionalType<ValueType>, OptionalType<T>> {
+  function compilePassThru(): Transform<OptionalType<ValueType>, OptionalType<T>> {
     return {
       transform: (input: OptionalType<ValueType>): OptionalType<T> => {
         return input as unknown as OptionalType<T>;

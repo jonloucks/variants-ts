@@ -98,7 +98,7 @@ export interface Variant<T> {
 }
 
 /**
- * Determine if an instance implements VariantFactory
+ * Determine if an instance implements Variant
  * 
  * @param instance the instance to check
  * @returns true if the instance implements Variant

@@ -46,10 +46,10 @@ export interface Environment {
 }
 
 /**
- * Determine if an instance implements VariantSource
+ * Determine if an instance implements Environment
  * 
  * @param instance the instance to check
- * @returns true if the instance implements VariantSource
+ * @returns true if the instance implements Environment
  */
 export function guard(instance: unknown): instance is RequiredType<Environment> {
   return guardFunctions(instance, 'getVariance', 'findVariance');
