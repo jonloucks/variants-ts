@@ -16,9 +16,9 @@ describe('Variant Suite', () => {
   assertGuard(guard, ...FUNCTION_NAMES);
 
   describe('Variant Tests', () => {
-    it('isConsumer should return true for Consumer', () => {
-      const consumer: Variant<string> = mockDuck<Variant<string>>(...FUNCTION_NAMES);
-      ok(guard(consumer), 'Consumer should return true');
+    it('guard should return true for Variant', () => {
+      const variant: Variant<string> = mockDuck<Variant<string>>(...FUNCTION_NAMES);
+      ok(guard(variant), 'Variant should return true');
     });
   });
 
