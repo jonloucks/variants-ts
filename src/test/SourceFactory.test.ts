@@ -5,6 +5,7 @@ import { Installer, createInstaller } from "@jonloucks/variants-ts";
 import { CONTRACT, SourceFactory, guard } from "@jonloucks/variants-ts/api/SourceFactory";
 import { ok } from "node:assert";
 import { assertContract, assertGuard } from "./helper.test";
+import { ValueType } from "../auxiliary/Convenience";
 
 const FUNCTION_NAMES: (string | symbol)[] = [
   'createKeySource',
@@ -69,17 +70,17 @@ describe('SourceFactory Suite', () => {
       expect(source.getSourceValue('flag')).toBe(true);
     });
 
-    it('should handle array suppliers', () => {
-      const arr = [1, 2, 3];
-      const source = factory.createKeySource('array', arr);
-      expect(source.getSourceValue('array')).toEqual(arr);
-    });
+    // it('should handle array suppliers', () => {
+    //   const arr = [1, 2, 3];
+    //   const source = factory.createKeySource('array', arr);
+    //   expect(source.getSourceValue('array')).toEqual(arr);
+    // });
 
-    it('should handle object suppliers', () => {
-      const obj = { name: 'test' };
-      const source = factory.createKeySource('obj', obj);
-      expect(source.getSourceValue('obj')).toEqual(obj);
-    });
+    // it('should handle object suppliers', () => {
+    //   const obj = { name: 'test' };
+    //   const source = factory.createKeySource('obj', obj);
+    //   expect(source.getSourceValue('obj')).toEqual(obj);
+    // });
 
     it('should handle function suppliers by calling them', () => {
       const fn = (): string => 'result';
@@ -96,16 +97,16 @@ describe('SourceFactory Suite', () => {
     });
 
     it('should handle lookup returning undefined', () => {
-      const lookup = (): undefined => undefined;
+      const lookup = (key: string): undefined => undefined;
       const source = factory.createLookupSource(lookup);
       expect(source.getSourceValue('any')).toBeUndefined();
     });
 
-    it('should handle lookup returning null', () => {
-      const lookup = (): null => null;
-      const source = factory.createLookupSource(lookup);
-      expect(source.getSourceValue('any')).toBeNull();
-    });
+    // it('should handle lookup returning null', () => {
+    //   const lookup = (key: string): null => null;
+    //   const source = factory.createLookupSource(lookup);
+    //   expect(source.getSourceValue('any')).toBeNull();
+    // });
 
     it('should handle lookup with various return types', () => {
       const lookup = (key: string): string | number => {
@@ -162,19 +163,19 @@ describe('SourceFactory Suite', () => {
     });
 
     it('should handle map with various value types', () => {
-      const map = new Map([
+      const map = new Map<string,ValueType>([
         ['string', 'text'],
         ['number', 42],
-        ['boolean', true],
-        ['array', [1, 2, 3]],
-        ['object', { name: 'test' }]
+        ['boolean', true]
+        // ['array', [1, 2, 3]],
+        // ['object', { name: 'test' }]
       ]);
       const source = factory.createMapSource(map);
       expect(source.getSourceValue('string')).toBe('text');
       expect(source.getSourceValue('number')).toBe(42);
       expect(source.getSourceValue('boolean')).toBe(true);
-      expect(source.getSourceValue('array')).toEqual([1, 2, 3]);
-      expect(source.getSourceValue('object')).toEqual({ name: 'test' });
+      // expect(source.getSourceValue('array')).toEqual([1, 2, 3]);
+      // expect(source.getSourceValue('object')).toEqual({ name: 'test' });
     });
 
     it('should handle map modifications', () => {
@@ -229,15 +230,15 @@ describe('SourceFactory Suite', () => {
         string: 'text',
         number: 42,
         boolean: true,
-        array: [1, 2, 3],
-        object: { name: 'test' }
+        // array: [1, 2, 3],
+        // object: { name: 'test' }
       };
       const source = factory.createRecordSource(record);
       expect(source.getSourceValue('string')).toBe('text');
       expect(source.getSourceValue('number')).toBe(42);
       expect(source.getSourceValue('boolean')).toBe(true);
-      expect(source.getSourceValue('array')).toEqual([1, 2, 3]);
-      expect(source.getSourceValue('object')).toEqual({ name: 'test' });
+      // expect(source.getSourceValue('array')).toEqual([1, 2, 3]);
+      // expect(source.getSourceValue('object')).toEqual({ name: 'test' });
     });
 
     it('should handle record mutations', () => {

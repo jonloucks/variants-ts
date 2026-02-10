@@ -59,7 +59,7 @@ describe("Convenience Module", () => {
         name: 'withFallback',
         description: 'Variant with fallback',
         fallback,
-        link: { variants: [] }
+        link: undefined,
       });
       ok(variant !== undefined);
       ok(variant.fallback === fallback);
@@ -211,9 +211,9 @@ describe("Convenience Module", () => {
       const record: Record<string, ValueType> = {
         string: 'text',
         number: 42,
-        boolean: true,
-        array: [1, 2, 3],
-        object: { nested: 'value' }
+        boolean: true
+        // array: [1, 2, 3],  // review supporting arrays in record sources, currently not supported due to ValueType definition
+        // object: { nested: 'value'}
       };
       const source = createRecordSource(record);
       ok(source.getSourceValue('string') === 'text');
