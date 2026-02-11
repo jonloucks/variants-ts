@@ -2,9 +2,9 @@
 
 ## Variants
 [![CI](https://github.com/jonloucks/variants-ts/workflows/main-push/badge.svg)](https://github.com/jonloucks/variants-ts/actions)
-[![npm version](https://raw.githubusercontent.com/jonloucks/variants-ts/refs/heads/variants/main-npm.svg)](https://www.npmjs.com/package/@jonloucks/variants-ts)
-[![Coverage Badge](https://raw.githubusercontent.com/jonloucks/variants-ts/refs/heads/variants/main-coverage.svg)](https://jonloucks.github.io/variants-ts/lcov-report/)
-[![Typedoc Badge](https://raw.githubusercontent.com/jonloucks/variants-ts/refs/heads/variants/main-typedoc.svg)](https://jonloucks.github.io/variants-ts/typedoc/)
+[![npm version](https://raw.githubusercontent.com/jonloucks/variants-ts/refs/heads/badges/main-npm.svg)](https://www.npmjs.com/package/@jonloucks/variants-ts)
+[![Coverage Badge](https://raw.githubusercontent.com/jonloucks/variants-ts/refs/heads/badges/main-coverage.svg)](https://jonloucks.github.io/variants-ts/lcov-report/)
+[![Typedoc Badge](https://raw.githubusercontent.com/jonloucks/variants-ts/refs/heads/badges/main-typedoc.svg)](https://jonloucks.github.io/variants-ts/typedoc/)
 
 
 TypeScript configuration library that normalizes how values are loaded from multiple sources.
