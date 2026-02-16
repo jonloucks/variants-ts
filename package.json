@@ -9,25 +9,21 @@
   "exports": {
     ".": {
       "types": "./index.d.ts",
-      "require": "./index.js",
       "import": "./index.js",
       "default": "./index.js"
     },
     "./version": {
       "types": "./version.d.ts",
-      "require": "./version.js",
       "import": "./version.js",
       "default": "./version.js"
     },
     "./api/*": {
       "types": "./api/*.d.ts",
-      "require": "./api/*.js",
       "import": "./api/*.js",
       "default": "./api/*.js"
     },
     "./auxiliary/*": {
       "types": "./auxiliary/*.d.ts",
-      "require": "./auxiliary/*.js",
       "import": "./auxiliary/*.js",
       "default": "./auxiliary/*.js"
     }
