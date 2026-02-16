@@ -1,8 +1,8 @@
-name: main-push-smoke
+name: main-release-smoke
 
 on:
-  push:
-    branches: [main]
+  release:
+    types: [created]
 
 permissions:
   contents: read
@@ -45,7 +45,7 @@ jobs:
           retention-days: 1
 
   smoke_matrix:
-    name: main-push-smoke (Node ${{ matrix.node-version }})
+    name: main-release-smoke (Node ${{ matrix.node-version }})
     runs-on: ubuntu-latest
     needs: build-package
 
@@ -93,7 +93,7 @@ jobs:
           npm test
 
   smoke_summary:
-    name: main-push-smoke-summary
+    name: main-release-smoke-summary
     runs-on: ubuntu-latest
     needs: smoke_matrix
     if: always()
