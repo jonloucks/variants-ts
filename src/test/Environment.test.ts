@@ -1,16 +1,17 @@
 import { AutoClose, CONTRACTS, Contracts, isPresent, RequiredType } from "@jonloucks/contracts-ts";
-import { Environment, guard, Config as EnvironmentConfig } from "@jonloucks/variants-ts/api/Environment";
+import { createInstaller } from "@jonloucks/variants-ts";
+import { Environment, Config as EnvironmentConfig, guard } from "@jonloucks/variants-ts/api/Environment";
 import { CONTRACT, EnvironmentFactory } from "@jonloucks/variants-ts/api/EnvironmentFactory";
 import { Installer } from "@jonloucks/variants-ts/api/Installer";
 import { Source } from "@jonloucks/variants-ts/api/Source";
+import { ValueType } from "@jonloucks/variants-ts/api/Types";
 import { Variant } from "@jonloucks/variants-ts/api/Variant";
 import { VariantException } from "@jonloucks/variants-ts/api/VariantException";
+import { CONTRACT as VARIANT_FACTORY_CONTRACT, VariantFactory } from "@jonloucks/variants-ts/api/VariantFactory";
+import { used } from "@jonloucks/variants-ts/auxiliary/Checks";
 import { assertGuard, mockDuck } from "@jonloucks/variants-ts/test/helper.test";
 import { deepStrictEqual, ok, strictEqual } from "node:assert";
-import { ValueType } from "@jonloucks/variants-ts/api/Types";
-import { used } from "@jonloucks/variants-ts/auxiliary/Checks";
-import { createInstaller } from "@jonloucks/variants-ts";
-import { VariantFactory, CONTRACT as VARIANT_FACTORY_CONTRACT } from "@jonloucks/variants-ts/api/VariantFactory";
+import { afterEach, beforeEach, describe, it } from "node:test";
 
 const FUNCTION_NAMES: (string | symbol)[] = [
   'getVariance',

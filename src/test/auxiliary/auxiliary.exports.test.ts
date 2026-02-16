@@ -1,4 +1,5 @@
 import { ok, strictEqual } from "node:assert";
+import { describe, it } from "node:test";
 
 import { OptionalType } from "@jonloucks/variants-ts/api/Types";
 import { presentCheck, used } from "@jonloucks/variants-ts/auxiliary/Checks";

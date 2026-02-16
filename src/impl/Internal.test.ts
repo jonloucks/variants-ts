@@ -1,4 +1,5 @@
 import { strictEqual } from "node:assert";
+import { describe, it } from "node:test";
 
 import { CONTRACTS } from "@jonloucks/contracts-ts";
 import { Internal } from "./Internal.impl";
@@ -33,7 +34,7 @@ describe("Internal resolveContracts", () => {
     const fallbackContracts = CONTRACTS;
 
     const result = Internal.resolveContracts(
-      { },
+      {},
       { contracts: fallbackContracts }
     );
 
@@ -42,8 +43,8 @@ describe("Internal resolveContracts", () => {
 
   it("returns default CONTRACTS when no configs have contracts", () => {
     const result = Internal.resolveContracts(
-      { },
-      { }
+      {},
+      {}
     );
 
     strictEqual(result, CONTRACTS, "Should return default CONTRACTS");
@@ -65,8 +66,8 @@ describe("Internal resolveContracts", () => {
     const thirdContracts = CONTRACTS;
 
     const result = Internal.resolveContracts(
-      { },
-      { },
+      {},
+      {},
       { contracts: thirdContracts },
       { contracts: CONTRACTS }
     );

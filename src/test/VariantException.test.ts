@@ -1,4 +1,5 @@
 import { throws } from "node:assert";
+import { describe, it } from "node:test";
 
 import { VariantException } from "@jonloucks/variants-ts/api/VariantException";
 
@@ -48,7 +49,7 @@ describe('VariantException Tests', () => {
     });
   });
 
-    it('rethrow with number caught without message, has correct name and message', () => {
+  it('rethrow with number caught without message, has correct name and message', () => {
     throws(() => {
       VariantException.rethrow(13);
     }, {

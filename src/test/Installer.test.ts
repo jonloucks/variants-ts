@@ -1,8 +1,9 @@
-import { ok } from "node:assert";
-import { Installer } from "@jonloucks/variants-ts/api/Installer";
-import { createInstaller } from "@jonloucks/variants-ts";
-import { guard as guardAutoOpen } from "@jonloucks/contracts-ts/api/AutoOpen";
 import { AutoClose } from "@jonloucks/contracts-ts";
+import { guard as guardAutoOpen } from "@jonloucks/contracts-ts/api/AutoOpen";
+import { createInstaller } from "@jonloucks/variants-ts";
+import { Installer } from "@jonloucks/variants-ts/api/Installer";
+import { ok } from "node:assert";
+import { describe, it } from "node:test";
 
 describe('Installer tests', () => {
   it('should create an installer instance', () => {
@@ -28,5 +29,5 @@ describe('Installer tests', () => {
     } else {
       ok(true, 'Installer does not provide AutoOpen, skipping test');
     }
-  }); 
+  });
 });
