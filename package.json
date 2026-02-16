@@ -78,6 +78,6 @@
     "typescript": "^5.9.3"
   },
   "dependencies": {
-    "@jonloucks/contracts-ts": "^1.4.0"
+    "@jonloucks/contracts-ts": "^2.0.2"
   }
 }
