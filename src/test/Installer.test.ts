@@ -1,4 +1,4 @@
-import { AutoClose } from "@jonloucks/contracts-ts";
+import { AutoClose } from "@jonloucks/contracts-ts/api/AutoClose";
 import { guard as guardAutoOpen } from "@jonloucks/contracts-ts/api/AutoOpen";
 import { createInstaller } from "@jonloucks/variants-ts";
 import { Installer } from "@jonloucks/variants-ts/api/Installer";

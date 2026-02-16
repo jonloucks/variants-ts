@@ -3,24 +3,27 @@
   "version": "0.1.0",
   "description": "Node.js Typescript Configuration Library, normalize how configuration is loaded from various sources is retrieved.",
   "private": true,
+  "type": "module",
   "main": "index.js",
   "types": "index.d.ts",
   "exports": {
     ".": {
       "types": "./index.d.ts",
-      "require": "./index.js",
       "import": "./index.js",
       "default": "./index.js"
     },
+    "./version": {
+      "types": "./version.d.ts",
+      "import": "./version.js",
+      "default": "./version.js"
+    },
     "./api/*": {
       "types": "./api/*.d.ts",
-      "require": "./api/*.js",
       "import": "./api/*.js",
       "default": "./api/*.js"
     },
     "./auxiliary/*": {
       "types": "./auxiliary/*.d.ts",
-      "require": "./auxiliary/*.js",
       "import": "./auxiliary/*.js",
       "default": "./auxiliary/*.js"
     }
@@ -66,8 +69,11 @@
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
   },
+  "engines": {
+    "node": ">=16.0.0"
+  },
   "devDependencies": {
-    "@jonloucks/badges-ts": "^0.1.0",
+    "@jonloucks/badges-ts": "^1.0.3",
     "@types/node": "^25.2.1",
     "@typescript-eslint/eslint-plugin": "^8.54.0",
     "@typescript-eslint/parser": "^8.53.1",
@@ -78,6 +84,6 @@
     "typescript": "^5.9.3"
   },
   "dependencies": {
-    "@jonloucks/contracts-ts": "^1.4.0"
+    "@jonloucks/contracts-ts": "^2.0.2"
   }
 }

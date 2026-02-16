@@ -2,7 +2,7 @@ import { RequiredType } from "@jonloucks/contracts-ts/api/Types";
 import { Environment, Config as EnvironmentConfig } from "@jonloucks/variants-ts/api/Environment";
 import { EnvironmentFactory } from "@jonloucks/variants-ts/api/EnvironmentFactory";
 
-import { create as createEnvironmentImpl } from "./Environment.impl";
+import { create as createEnvironmentImpl } from "./Environment.impl.js";
 
 /**
  * Create an EnvironmentFactory instance

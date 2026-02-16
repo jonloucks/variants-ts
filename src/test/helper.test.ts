@@ -11,12 +11,12 @@ describe('Helper Tests', () => {
 });
 
 /**
- * Simple mock factory that creates objects with the specified property names.
+ * Simple factory that creates objects with the specified function property names.
  * This creates a basic duck-type compatible mock for testing purposes.
  * 
  * @param propertyNames the names of methods to be auto created
  */
-export function mockDuck<T>(...propertyNames: (string | symbol)[]): T {
+export function makeDuck<T>(...propertyNames: (string | symbol)[]): T {
   const mocked: Record<string | symbol, unknown> = {};
   for (const propertyName of propertyNames) {
     // Create a mock function for each property

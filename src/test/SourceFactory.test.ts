@@ -1,4 +1,4 @@
-import { used } from "@jonloucks/badges-ts/auxiliary/Checks";
+import { used } from "@jonloucks/contracts-ts/auxiliary/Checks";
 import { CONTRACTS } from "@jonloucks/contracts-ts";
 import { AutoClose } from "@jonloucks/contracts-ts/api/AutoClose";
 import { Contracts } from "@jonloucks/contracts-ts/api/Contracts";
@@ -6,8 +6,8 @@ import { Installer, createInstaller } from "@jonloucks/variants-ts";
 import { CONTRACT as SOURCE_FACTORY_CONTRACT, SourceFactory, guard } from "@jonloucks/variants-ts/api/SourceFactory";
 import { ok, strictEqual } from "node:assert";
 import { afterEach, beforeEach, describe, it } from "node:test";
-import { ValueType } from "../auxiliary/Convenience";
-import { assertContract, assertGuard } from "./helper.test";
+import { ValueType } from "@jonloucks/variants-ts/auxiliary/Convenience";
+import { assertContract, assertGuard } from "./helper.test.js";
 
 const FUNCTION_NAMES: (string | symbol)[] = [
   'createKeySource',

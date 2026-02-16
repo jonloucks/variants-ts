@@ -10,9 +10,9 @@
  * @license MIT
  */
 import { Installer, Config as InstallerConfig } from "@jonloucks/variants-ts/api/Installer";
-import { VERSION } from "./version";
+import { VERSION } from "./version.js";
 
-import { create as createInstaller } from "./impl/Installer.impl";
+import { create as createInstaller } from "./impl/Installer.impl.js";
 
 const BOOTSTRAPPED = ((): boolean => {
   createInstaller().open(); // currently there is nothing to clean up

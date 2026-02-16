@@ -2,7 +2,7 @@ import { strictEqual } from "node:assert";
 import { describe, it } from "node:test";
 
 import { CONTRACTS } from "@jonloucks/contracts-ts";
-import { Internal } from "./Internal.impl";
+import { Internal } from "./Internal.impl.js";
 
 describe("Internal resolveContracts", () => {
 
