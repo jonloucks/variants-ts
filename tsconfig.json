@@ -1,13 +1,8 @@
 {
   "compilerOptions": {
     "target": "ES2020",
-    "module": "NodeNext",
-    "lib": [
-      "ES2020"
-    ],
-    "types": [
-      "node"
-    ],
+    "module": "node16",
+    "lib": ["ES2020"],
     "declaration": true,
     "declarationMap": true,
     "sourceMap": true,
@@ -18,35 +13,17 @@
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "moduleResolution": "NodeNext",
+    "moduleResolution": "node16",
     "isolatedModules": true,
     "resolveJsonModule": true,
     "baseUrl": "./src",
     "paths": {
-      "@jonloucks/variants-ts": [
-        "index.ts"
-      ],
-      "@jonloucks/variants-ts/version": [
-        "version.ts"
-      ],
-      "@jonloucks/variants-ts/auxiliary/*": [
-        "auxiliary/*"
-      ],
-      "@jonloucks/variants-ts/api/*": [
-        "api/*"
-      ],
-      "@jonloucks/variants-ts/test/*": [
-        "test/*"
-      ]
+      "@jonloucks/variants-ts": ["index.js"],
+      "@jonloucks/variants-ts/version": ["version.js"],
+      "@jonloucks/variants-ts/auxiliary/*": ["auxiliary/*.js"],
+      "@jonloucks/variants-ts/api/*": ["api/*.js"]
     },
   },
-  "include": [
-    "src/**/*",
-    "src/auxiliary/.ts"
-  ],
-  "exclude": [
-    "node_modules",
-    "dist",
-    "packs"
-  ]
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist", "packs"]
 }

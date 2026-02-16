@@ -3,10 +3,11 @@ import { ok, strictEqual, deepStrictEqual } from "node:assert";
 
 import { ParserFactory, guard, CONTRACT as PARSER_FACTORY_CONTRACT } from "@jonloucks/variants-ts/api/ParserFactory";
 
-import { assertContract, assertGuard } from "./helper.test";
+import { assertContract, assertGuard } from "./helper.test.js";
 import { Installer } from "@jonloucks/variants-ts/api/Installer";
-import { AutoClose, Contracts, CONTRACTS } from "@jonloucks/contracts-ts";
+import { Contracts, CONTRACTS } from "@jonloucks/contracts-ts";
 import { createInstaller } from "@jonloucks/variants-ts";
+import { AutoClose } from "@jonloucks/contracts-ts/api/AutoClose";
 
 const FUNCTION_NAMES: (string | symbol)[] = [
   'stringParser',

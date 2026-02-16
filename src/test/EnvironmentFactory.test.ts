@@ -1,12 +1,14 @@
 import { ok } from "node:assert";
 import { afterEach, beforeEach, describe, it } from "node:test";
 
-import { AutoClose, Contracts, CONTRACTS, isPresent } from "@jonloucks/contracts-ts";
+import { Contracts, CONTRACTS } from "@jonloucks/contracts-ts";
+import { AutoClose } from "@jonloucks/contracts-ts/api/AutoClose";
 import { createInstaller } from "@jonloucks/variants-ts";
 import { Environment } from "@jonloucks/variants-ts/api/Environment";
 import { CONTRACT as ENVIRONMENT_FACTORY_CONTRACT, EnvironmentFactory, guard } from "@jonloucks/variants-ts/api/EnvironmentFactory";
 import { Installer } from "@jonloucks/variants-ts/api/Installer";
-import { assertContract, assertGuard, mockDuck } from "@jonloucks/variants-ts/test/helper.test";
+import { isPresent } from "../api/Types.js";
+import { assertContract, assertGuard, makeDuck } from "./helper.test.js";
 
 const FUNCTION_NAMES: (string | symbol)[] = [
   'createEnvironment'
@@ -32,7 +34,7 @@ describe('EnvironmentFactory Suite', () => {
   });
 
   it('isEnvironmentFactory should return true for EnvironmentFactory', () => {
-    const factory: EnvironmentFactory = mockDuck<EnvironmentFactory>(...FUNCTION_NAMES);
+    const factory: EnvironmentFactory = makeDuck<EnvironmentFactory>(...FUNCTION_NAMES);
     ok(guard(factory), 'EnvironmentFactory should return true');
   });
 

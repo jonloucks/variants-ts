@@ -1,4 +1,4 @@
-import { RequiredType } from "@jonloucks/contracts-ts";
+import { RequiredType } from "@jonloucks/contracts-ts/api/Types";
 import { Type as SupplierType, toValue } from "@jonloucks/contracts-ts/auxiliary/Supplier";
 import { Source } from "@jonloucks/variants-ts/api/Source";
 import { SourceFactory } from "@jonloucks/variants-ts/api/SourceFactory";

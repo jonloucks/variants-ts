@@ -1,4 +1,4 @@
-import { OptionalType, RequiredType } from "@jonloucks/contracts-ts";
+import { OptionalType, RequiredType } from "@jonloucks/contracts-ts/api/Types";
 import { Transform } from "@jonloucks/contracts-ts/auxiliary/Transform";
 import { ParserFactory } from "@jonloucks/variants-ts/api/ParserFactory";
 import { isNotPresent, isPresent, ValueType } from "@jonloucks/variants-ts/api/Types";

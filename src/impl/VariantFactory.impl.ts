@@ -2,7 +2,7 @@ import { Variant, Config as VariantConfig } from "@jonloucks/variants-ts/api/Var
 import { VariantFactory } from "@jonloucks/variants-ts/api/VariantFactory";
 import { RequiredType } from "@jonloucks/variants-ts/api/Types";
 
-import { create as createVariantImpl } from "./Variant.impl";
+import { create as createVariantImpl } from "./Variant.impl.js";
 
 /**
  * Factory function to create a VariantFactory instance.

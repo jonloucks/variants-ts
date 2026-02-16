@@ -1,13 +1,14 @@
-import { AutoClose, CONTRACTS, Contracts } from "@jonloucks/contracts-ts";
+import { CONTRACTS, Contracts } from "@jonloucks/contracts-ts";
+import { AutoClose } from "@jonloucks/contracts-ts/api/AutoClose";
 import { isPresent, RequiredType } from "@jonloucks/contracts-ts/api/Types";
 import { IllegalArgumentException } from "@jonloucks/contracts-ts/auxiliary/IllegalArgumentException";
 import { createInstaller } from "@jonloucks/variants-ts";
 import { Installer } from "@jonloucks/variants-ts/api/Installer";
 import { check, guard, Variant, Config as VariantConfig } from "@jonloucks/variants-ts/api/Variant";
 import { CONTRACT as VARIANT_FACTORY, VariantFactory } from "@jonloucks/variants-ts/api/VariantFactory";
-import { assertGuard, mockDuck } from "@jonloucks/variants-ts/test/helper.test";
 import { deepStrictEqual, ok, strictEqual } from "node:assert";
 import { afterEach, beforeEach, describe, it } from "node:test";
+import { assertGuard, makeDuck } from "./helper.test.js";
 
 describe('Variant Suite', () => {
   let contracts: Contracts = CONTRACTS;
@@ -37,7 +38,7 @@ describe('Variant Suite', () => {
 
   describe('Variant Tests', () => {
     it('guard should return true for Variant', () => {
-      const variant: Variant<string> = mockDuck<Variant<string>>(...FUNCTION_NAMES);
+      const variant: Variant<string> = makeDuck<Variant<string>>(...FUNCTION_NAMES);
       ok(guard(variant), 'Variant should return true');
     });
   });
@@ -710,7 +711,7 @@ describe('Variant Suite', () => {
     });
 
     it('should accept mocked variant with all required properties', () => {
-      const mockedVariant: Variant<string> = mockDuck<Variant<string>>(...FUNCTION_NAMES);
+      const mockedVariant: Variant<string> = makeDuck<Variant<string>>(...FUNCTION_NAMES);
       const result = check<string>(mockedVariant);
       strictEqual(result, mockedVariant, 'should return mocked variant');
     });

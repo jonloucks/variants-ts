@@ -7,7 +7,7 @@ import { isPresent } from "@jonloucks/contracts-ts/api/Types";
 import { createInstaller, Installer } from "@jonloucks/variants-ts";
 import { Variant } from "@jonloucks/variants-ts/api/Variant";
 import { guard, CONTRACT as VARIANT_FACTORY_CONTRACT, VariantFactory } from "@jonloucks/variants-ts/api/VariantFactory";
-import { assertContract, assertGuard, mockDuck } from "./helper.test";
+import { assertContract, assertGuard, makeDuck } from "./helper.test.js";
 
 const FUNCTION_NAMES: (string | symbol)[] = [
   'createVariant'
@@ -34,7 +34,7 @@ describe('VariantFactory Suite', () => {
   });
 
   it('isVariantFactory should return true for VariantFactory', () => {
-    const factory: VariantFactory = mockDuck<VariantFactory>(...FUNCTION_NAMES);
+    const factory: VariantFactory = makeDuck<VariantFactory>(...FUNCTION_NAMES);
     ok(guard(factory), 'VariantFactory should return true');
   });
 
