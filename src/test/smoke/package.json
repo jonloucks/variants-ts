@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "build": "tsc",
-    "test": "tsc -p tsconfig.json && tsx --test $(find src -name '*.test.ts')",
+    "test": "tsx --test $(find src -name '*.test.ts')",
     "clean": "rm -rf dist && npm install",
     "compile": "tsc"
   },
