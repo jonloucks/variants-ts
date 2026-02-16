@@ -1,10 +1,11 @@
 import { ok } from "node:assert";
+import { describe, it } from "node:test";
 
 import {
-  VERSION,
   BOOTSTRAPPED,
   Installer,
-  InstallerConfig
+  InstallerConfig,
+  VERSION
 } from "@jonloucks/variants-ts";
 import { used } from "@jonloucks/variants-ts/auxiliary/Checks";
 
@@ -17,7 +18,7 @@ import { used } from "@jonloucks/variants-ts/auxiliary/Checks";
  */
 
 describe('variants-ts/api Index exports', () => {
-  let installer: Installer | undefined  = undefined;
+  let installer: Installer | undefined = undefined;
   let installerConfig: InstallerConfig | undefined = undefined;
   it('should export all expected members', () => {
     ok(VERSION.length > 0, 'VERSION should be exported and non-empty');

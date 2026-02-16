@@ -1,12 +1,13 @@
 import { ok } from "node:assert";
+import { afterEach, beforeEach, describe, it } from "node:test";
 
-import { VariantFactory, guard, CONTRACT as VARIANT_FACTORY_CONTRACT } from "@jonloucks/variants-ts/api/VariantFactory";
-import { Variant } from "@jonloucks/variants-ts/api/Variant";
-import { AutoClose } from "@jonloucks/contracts-ts/api/AutoClose";
-import { assertContract, assertGuard, mockDuck } from "./helper.test";
-import { isPresent } from "@jonloucks/contracts-ts/api/Types";
 import { Contracts, CONTRACTS } from "@jonloucks/contracts-ts";
-import { Installer, createInstaller } from "@jonloucks/variants-ts";
+import { AutoClose } from "@jonloucks/contracts-ts/api/AutoClose";
+import { isPresent } from "@jonloucks/contracts-ts/api/Types";
+import { createInstaller, Installer } from "@jonloucks/variants-ts";
+import { Variant } from "@jonloucks/variants-ts/api/Variant";
+import { guard, CONTRACT as VARIANT_FACTORY_CONTRACT, VariantFactory } from "@jonloucks/variants-ts/api/VariantFactory";
+import { assertContract, assertGuard, mockDuck } from "./helper.test";
 
 const FUNCTION_NAMES: (string | symbol)[] = [
   'createVariant'

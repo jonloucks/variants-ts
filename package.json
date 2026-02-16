@@ -33,10 +33,9 @@
   ],
   "scripts": {
     "build": "tsc",
-    "test": "jest",
-    "test:watch": "jest --watch --watchAll",
-    "test:coverage": "jest --coverage",
-    "test:diagnostics": "jest --detectOpenHandles",
+    "test": "tsx --test $(find src -name '*.test.ts')",
+    "test:watch": "tsx --test --watch $(find src -name '*.test.ts')",
+    "test:coverage": "npx c8 --check-coverage --lines 95 --functions 95 --branches 85 --statements 95 --reporter=lcov npx tsx --test $(find src -name '*.test.ts')",
     "lint": "eslint . --ext .ts",
     "lint:fix": "eslint . --ext .ts --fix",
     "prepublishOnly": "npm run build",
@@ -44,7 +43,7 @@
     "after:publish": "npm run clean",
     "prepare": "npm run build",
     "docs": "typedoc --options typedoc.json",
-    "badges": "npx badges-ts generate-badges",
+    "badges": "npx badges-ts generate",
     "discover": "npx badges-ts discover",
     "clean": "rm -rf dist && rm -rf coverage && npm install",
     "compile": "tsc",
@@ -68,17 +67,15 @@
     "registry": "https://registry.npmjs.org/"
   },
   "devDependencies": {
-    "@types/jest": "^30.0.0",
+    "@jonloucks/badges-ts": "^0.1.0",
     "@types/node": "^25.2.1",
     "@typescript-eslint/eslint-plugin": "^8.54.0",
     "@typescript-eslint/parser": "^8.53.1",
+    "c8": "^10.1.2",
     "eslint": "^9.39.2",
-    "jest": "^30.2.0",
-    "jest-mock-extended": "^4.0.0",
-    "ts-jest": "^29.4.6",
+    "tsx": "^4.16.2",
     "typedoc": "^0.28.15",
-    "typescript": "^5.9.3",
-    "@jonloucks/badges-ts": "^0.1.0"
+    "typescript": "^5.9.3"
   },
   "dependencies": {
     "@jonloucks/contracts-ts": "^1.4.0"

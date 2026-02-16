@@ -1,12 +1,13 @@
+import { AutoClose, CONTRACTS, Contracts } from "@jonloucks/contracts-ts";
 import { isPresent, RequiredType } from "@jonloucks/contracts-ts/api/Types";
 import { IllegalArgumentException } from "@jonloucks/contracts-ts/auxiliary/IllegalArgumentException";
-import { Variant, check, guard, Config as VariantConfig } from "@jonloucks/variants-ts/api/Variant";
+import { createInstaller } from "@jonloucks/variants-ts";
+import { Installer } from "@jonloucks/variants-ts/api/Installer";
+import { check, guard, Variant, Config as VariantConfig } from "@jonloucks/variants-ts/api/Variant";
+import { CONTRACT as VARIANT_FACTORY, VariantFactory } from "@jonloucks/variants-ts/api/VariantFactory";
 import { assertGuard, mockDuck } from "@jonloucks/variants-ts/test/helper.test";
 import { deepStrictEqual, ok, strictEqual } from "node:assert";
-import { AutoClose, CONTRACTS, Contracts } from "@jonloucks/contracts-ts";
-import { Installer } from "@jonloucks/variants-ts/api/Installer";
-import { VariantFactory, CONTRACT as VARIANT_FACTORY } from "@jonloucks/variants-ts/api/VariantFactory";
-import { createInstaller } from "@jonloucks/variants-ts";
+import { afterEach, beforeEach, describe, it } from "node:test";
 
 describe('Variant Suite', () => {
   let contracts: Contracts = CONTRACTS;

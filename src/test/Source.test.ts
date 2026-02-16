@@ -1,4 +1,5 @@
 import { ok } from "node:assert";
+import { describe, it } from "node:test";
 
 import { Source, guard } from "@jonloucks/variants-ts/api/Source";
 import { assertGuard, mockDuck } from "@jonloucks/variants-ts/test/helper.test";

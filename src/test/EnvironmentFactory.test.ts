@@ -1,11 +1,12 @@
 import { ok } from "node:assert";
+import { afterEach, beforeEach, describe, it } from "node:test";
 
 import { AutoClose, Contracts, CONTRACTS, isPresent } from "@jonloucks/contracts-ts";
-import { EnvironmentFactory, guard, CONTRACT as ENVIRONMENT_FACTORY_CONTRACT } from "@jonloucks/variants-ts/api/EnvironmentFactory";
+import { createInstaller } from "@jonloucks/variants-ts";
 import { Environment } from "@jonloucks/variants-ts/api/Environment";
+import { CONTRACT as ENVIRONMENT_FACTORY_CONTRACT, EnvironmentFactory, guard } from "@jonloucks/variants-ts/api/EnvironmentFactory";
 import { Installer } from "@jonloucks/variants-ts/api/Installer";
 import { assertContract, assertGuard, mockDuck } from "@jonloucks/variants-ts/test/helper.test";
-import { createInstaller } from "@jonloucks/variants-ts";
 
 const FUNCTION_NAMES: (string | symbol)[] = [
   'createEnvironment'

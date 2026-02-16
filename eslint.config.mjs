@@ -13,7 +13,11 @@ export default [
       },
       globals: {
         console: 'readonly',
-        process: 'readonly'
+        process: 'readonly',
+        describe: 'readonly',
+        it: 'readonly',
+        beforeEach: 'readonly',
+        afterEach: 'readonly'
       }
     },
     plugins: {
@@ -28,6 +32,6 @@ export default [
     }
   },
   {
-    ignores: ['dist/', 'node_modules/', 'coverage/', 'eslint.config.mjs', 'packs/**' ]
+    ignores: ['dist/', 'node_modules/', 'coverage/', 'eslint.config.mjs', 'packs/**']
   }
 ];
