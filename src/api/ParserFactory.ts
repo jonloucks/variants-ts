@@ -10,56 +10,56 @@ import { ValueType } from "@jonloucks/variants-ts/api/Types";
 export interface ParserFactory {
 
   /**
-   * @return a parser that converts a valid text into a String
+   * @returns a parser that converts a valid text into a String
    */
   stringParser(): Transform<ValueType, string>;
 
   /**
    * No trimming or skipping empty values
-   * @return a text conversion to a String instance
+   * @returns a text conversion to a String instance
    */
   ofRawString(): Transform<OptionalType<ValueType>, OptionalType<string>>;
 
   /**
    * Input is trimmed and empty values are skipped
    *
-   * @return a text conversion to a String instance
+   * @returns a text conversion to a String instance
    */
   ofString(): Transform<OptionalType<ValueType>, OptionalType<string>>;
 
   /**
-   * @return a parser that converts a valid text value into a Boolean instance
+   * @returns a parser that converts a valid text value into a Boolean instance
    */
   booleanParser(): Transform<RequiredType<ValueType>, RequiredType<boolean>>
 
   /**
    * Input is trimmed and empty values are skipped
    *
-   * @return a text conversion to a Boolean instance
+   * @returns a text conversion to a Boolean instance
    */
   ofBoolean(): Transform<OptionalType<ValueType>, OptionalType<boolean>>;
 
   /**
-   * @return a parser that converts a valid text value into a Float instance
+   * @returns a parser that converts a valid text value into a Float instance
    */
   numberParser(): Transform<RequiredType<ValueType>, RequiredType<number>>;
 
   /**
    * Input is trimmed and empty values are skipped
    *
-   * @return a text conversion to a Float instance
+   * @returns a text conversion to a Float instance
    */
   ofNumber(): Transform<OptionalType<ValueType>, OptionalType<number>>;
 
   /**
-   * @return a parser that converts a valid text value into a BigInt instance
+   * @returns a parser that converts a valid text value into a BigInt instance
    */
   bigIntParser(): Transform<RequiredType<ValueType>, RequiredType<bigint>>;
 
   /**
    * Input is trimmed and empty values are skipped
    *
-   * @return a text conversion to a BigInt instance
+   * @returns a text conversion to a BigInt instance
    */
   ofBigInt(): Transform<OptionalType<ValueType>, OptionalType<bigint>>;
 
@@ -67,7 +67,7 @@ export interface ParserFactory {
    * trim leading and trailing white space
    *
    * @param text the text to trim
-   * @return the trimmed text
+   * @returns the trimmed text
    */
   trim(text: RequiredType<ValueType>): RequiredType<ValueType>;
 
@@ -75,7 +75,7 @@ export interface ParserFactory {
    * A parser that converts text to a String
    *
    * @param parser the parser that accepts the String
-   * @return the new parser
+   * @returns the new parser
    * @param <T> the return type of the given parser
    */
   string<T>(parser: Transform<string, T>): Transform<ValueType, T>;
@@ -86,7 +86,7 @@ export interface ParserFactory {
    * Skips empty values
    *
    * @param parser the delegate parser
-   * @return the new 'of' function
+   * @returns the new 'of' function
    * @param <T> the return type of the given parser
    */
   ofTrimAndSkipEmpty<T>(parser: Transform<ValueType, T>): Transform<ValueType, OptionalType<T>>;
@@ -96,7 +96,7 @@ export interface ParserFactory {
    *
    * @param of the delegate text to value function
    * @param delimiter the string delimiter.
-   * @return the new parser
+   * @returns the new parser
    * @param <T> the return type of the given parser
    */
   ofList<T>(of: Transform<ValueType, OptionalType<T>>, delimiter: string): Transform<ValueType, OptionalType<Array<T>>>;

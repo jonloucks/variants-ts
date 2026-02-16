@@ -12,40 +12,40 @@ export interface Config<T> {
 
   /**
    * The primary use case of getting a property value by key
-   * @return the ordered list of keys used to search for values.
+   * @returns the ordered list of keys used to search for values.
    */
   keys?: readonly string[];
 
   /**
    * Note: The name is not used to look up values!
-   * @return The user facing name of this Variant
+   * @returns The user facing name of this Variant
    */
   name?: string;
 
   /**
-   * @return the optional description
+   * @returns the optional description
    */
   description?: string;
 
   /**
-   * @return the optional fallback value. aka default value
+   * @returns the optional fallback value. aka default value
    */
   fallback?: T;
 
   /**
    * Links can be helpful when a Variant which does not
    * have an explicit value can default the value of another Variant.
-   * @return The optional link to another Variant
+   * @returns The optional link to another Variant
    */
   link?: Variant<T>;
 
   /**
-   * @return The parser used to convert value text into a Variant value
+   * @returns The parser used to convert value text into a Variant value
    */
   parser?: TransformType<RequiredType<ValueType>, RequiredType<T>>;
 
   /**
-   * @return The transform used to convert value text into a Variant value
+   * @returns The transform used to convert value text into a Variant value
    */
   of?: TransformType<OptionalType<ValueType>, OptionalType<T>>;
 };
@@ -60,30 +60,30 @@ export interface Variant<T> {
   /**
    * Note: The name is not used to look up values!
    * Note: if name is not set the first key might be used
-   * @return The user facing name of this Variant
+   * @returns The user facing name of this Variant
    */
   get name(): string;
 
   /**
    * The primary use case of getting a property value by key
-   * @return the ordered list of keys used to search for values.
+   * @returns the ordered list of keys used to search for values.
    */
   get keys(): readonly string[];
 
   /**
-   * @return the optional description
+   * @returns the optional description
    */
   get description(): string;
 
   /**
-   * @return the optional fallback value. aka default value
+   * @returns the optional fallback value. aka default value
    */
   get fallback(): OptionalType<T>;
 
   /**
    * Links can be helpful when a Variant which does not
    * have an explicit value can default the value of another Variant.
-   * @return The optional link to another Variant
+   * @returns The optional link to another Variant
    */
   get link(): OptionalType<Variant<T>>;
 
@@ -92,7 +92,7 @@ export interface Variant<T> {
    * Note: Required if keys are used to retrieve a value.
    * Note: implementations of this function should return empty on null values.
    * @param valueText the text to be parsed
-   * @return the optional Variant value
+   * @returns the optional Variant value
    */
   of(valueText: ValueType): OptionalType<T>;
 }

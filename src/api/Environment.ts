@@ -8,7 +8,7 @@ import { Variant } from "@jonloucks/variants-ts/api/Variant";
 export interface Config {
 
   /**
-   * @return the list of sources. An empty list is allowed.
+   * @returns the list of sources. An empty list is allowed.
    */
   sources?: readonly Source[];
 };
@@ -27,7 +27,7 @@ export interface Environment {
    * Find a variance if it exists.
    *
    * @param variant the Variant
-   * @return the optional value
+   * @returns the optional value
    * @param <T> the type of variance value
    * @throws IllegalArgumentException when arguments are null or invalid
    */
@@ -37,7 +37,7 @@ export interface Environment {
    * Get required variance or throw an exception.
    *
    * @param variant the Variant
-   * @return the variance
+   * @returns the variance
    * @throws VariantException if not found
    * @param <T> the type of variance value
    * @throws IllegalArgumentException when arguments are null or invalid

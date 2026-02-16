@@ -19,7 +19,7 @@ const valueCheck: <ValueType>(value: OptionalType<ValueType>)
  * Check that a key is present and not empty.
  * <p>
  * @param value the value to check
- * @return the value if it is present and not empty
+ * @returns the value if it is present and not empty
  * @throws IllegalArgumentException if the value is not present or is empty
  */
 const parserCheck: <T>(value: OptionalType<T>)
@@ -32,7 +32,7 @@ const parserCheck: <T>(value: OptionalType<T>)
  * Check that a value is not used.
  * <p>
  * @param value the value to check
- * @return the value if it is not used
+ * @returns the value if it is not used
  * @throws IllegalArgumentException if the value is already used
  */
 const keyCheck: (value: OptionalType<string>)
@@ -42,16 +42,15 @@ const keyCheck: (value: OptionalType<string>)
   }
 
 export {
-  type OptionalType,
-  type RequiredType,
-  type ValueType,
   configCheck,
   illegalCheck,
   keyCheck,
   parserCheck,
   presentCheck,
   used,
-  valueCheck
+  valueCheck, type OptionalType,
+  type RequiredType,
+  type ValueType
 };
 
 

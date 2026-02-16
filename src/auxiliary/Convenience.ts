@@ -11,17 +11,17 @@
  * source modules of the auxiliary types. 
  */
 
-import { OptionalType, RequiredType } from "@jonloucks/contracts-ts/api/Types";
-import { Variant, Config as VariantConfig } from "@jonloucks/variants-ts/api/Variant";
-import { Environment, Config as EnvironmentConfig } from "@jonloucks/variants-ts/api/Environment";
-import { Type as SupplierType } from "@jonloucks/contracts-ts/auxiliary/Supplier";
-import { Source } from "@jonloucks/variants-ts/api/Source";
 import { CONTRACTS } from "@jonloucks/contracts-ts";
+import { OptionalType, RequiredType } from "@jonloucks/contracts-ts/api/Types";
+import { Type as SupplierType } from "@jonloucks/contracts-ts/auxiliary/Supplier";
 import { VERSION } from "@jonloucks/variants-ts";
-import { EnvironmentFactory, CONTRACT as ENVIRONMENT_FACTORY_CONTRACT } from "@jonloucks/variants-ts/api/EnvironmentFactory";
-import { VariantFactory, CONTRACT as VARIANT_FACTORY_CONTRACT } from "@jonloucks/variants-ts/api/VariantFactory";
-import { SourceFactory, CONTRACT as SOURCE_FACTORY_CONTRACT } from "@jonloucks/variants-ts/api/SourceFactory";
+import { Environment, Config as EnvironmentConfig } from "@jonloucks/variants-ts/api/Environment";
+import { CONTRACT as ENVIRONMENT_FACTORY_CONTRACT, EnvironmentFactory } from "@jonloucks/variants-ts/api/EnvironmentFactory";
+import { Source } from "@jonloucks/variants-ts/api/Source";
+import { CONTRACT as SOURCE_FACTORY_CONTRACT, SourceFactory } from "@jonloucks/variants-ts/api/SourceFactory";
 import { ValueType } from "@jonloucks/variants-ts/api/Types";
+import { Variant, Config as VariantConfig } from "@jonloucks/variants-ts/api/Variant";
+import { CONTRACT as VARIANT_FACTORY_CONTRACT, VariantFactory } from "@jonloucks/variants-ts/api/VariantFactory";
 
 const ENVIRONMENT_FACTORY: RequiredType<EnvironmentFactory> = CONTRACTS.enforce(ENVIRONMENT_FACTORY_CONTRACT);
 
@@ -56,7 +56,7 @@ function createEnvironment(config?: EnvironmentConfig): RequiredType<Environment
  * 
  * @param key the key to retrieve values for
  * @param supplier a function that supplies values based on the provided key
- * @return a Source instance that retrieves values using the provided key and supplier function
+ * @returns a Source instance that retrieves values using the provided key and supplier function
  */
 function createKeySource(key: string, supplier: SupplierType<ValueType>): RequiredType<Source> {
   return SOURCE_FACTORY.createKeySource(key, supplier);
@@ -66,7 +66,7 @@ function createKeySource(key: string, supplier: SupplierType<ValueType>): Requir
  * Creates a source that retrieves values based on a key and a lookup function.
  * 
  * @param lookup a function that retrieves values based on a provided key
- * @return a Source instance that retrieves values using the provided lookup function
+ * @returns a Source instance that retrieves values using the provided lookup function
 */
 function createLookupSource(lookup: (key: string) => ValueType): RequiredType<Source> {
   return SOURCE_FACTORY.createLookupSource(lookup);
@@ -76,7 +76,7 @@ function createLookupSource(lookup: (key: string) => ValueType): RequiredType<So
  * Creates a source that retrieves values based on a Map of keys and values.
  * 
  * @param map a Map containing keys and their corresponding values
- * @return a Source instance that retrieves values using the provided Map
+ * @returns a Source instance that retrieves values using the provided Map
  */
 function createMapSource(map: Map<string, ValueType>): RequiredType<Source> {
   return SOURCE_FACTORY.createMapSource(map);
@@ -86,7 +86,7 @@ function createMapSource(map: Map<string, ValueType>): RequiredType<Source> {
  * Creates a source that retrieves values based on a Record of keys and values.
  * 
  * @param record a Record containing keys and their corresponding values
- * @return a Source instance that retrieves values using the provided Record
+ * @returns a Source instance that retrieves values using the provided Record
  */
 function createRecordSource(record: Record<string, ValueType>): RequiredType<Source> {
   return SOURCE_FACTORY.createRecordSource(record);
@@ -95,14 +95,21 @@ function createRecordSource(record: Record<string, ValueType>): RequiredType<Sou
 /**
  * Creates a source that retrieves values from the process environment variables.
  * 
- * @return a Source instance that retrieves values from the process environment variables
+ * @returns a Source instance that retrieves values from the process environment variables
  */
 function createProcessSource(): RequiredType<Source> {
   return SOURCE_FACTORY.createProcessSource();
 }
 
 export {
-  type Environment,
+  CONTRACTS,
+  createEnvironment,
+  createKeySource,
+  createLookupSource,
+  createMapSource,
+  createProcessSource,
+  createRecordSource,
+  createVariant, VERSION, type Environment,
   type EnvironmentConfig,
   type EnvironmentFactory,
   type OptionalType,
@@ -113,14 +120,5 @@ export {
   type ValueType,
   type Variant,
   type VariantConfig,
-  type VariantFactory,
-  VERSION,
-  CONTRACTS,
-  createEnvironment,
-  createKeySource,
-  createLookupSource,
-  createMapSource,
-  createProcessSource,
-  createRecordSource,
-  createVariant
+  type VariantFactory
 };

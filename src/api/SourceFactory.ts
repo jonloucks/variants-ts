@@ -27,7 +27,7 @@ export interface SourceFactory {
    * 
    * @param key the key to retrieve values for
    * @param supplier a function that supplies values based on the provided key
-   * @return a Source instance that retrieves values using the provided key and supplier function
+   * @returns a Source instance that retrieves values using the provided key and supplier function
    */
   createKeySource(key: string, supplier: SupplierType<ValueType>): RequiredType<Source>;
 
@@ -35,7 +35,7 @@ export interface SourceFactory {
    * Creates a source that retrieves values based on a key and a lookup function.
    * 
    * @param lookup a function that retrieves values based on a provided key
-   * @return a Source instance that retrieves values using the provided lookup function
+   * @returns a Source instance that retrieves values using the provided lookup function
   */
   createLookupSource(lookup: (key: string) => ValueType): RequiredType<Source>;
 
@@ -43,7 +43,7 @@ export interface SourceFactory {
    * Creates a source that retrieves values based on a Map of keys and values.
    * 
    * @param map a Map containing keys and their corresponding values
-   * @return a Source instance that retrieves values using the provided Map
+   * @returns a Source instance that retrieves values using the provided Map
    */
   createMapSource(map: Map<string, ValueType>): RequiredType<Source>;
 
@@ -51,13 +51,13 @@ export interface SourceFactory {
    * Creates a source that retrieves values based on a Record of keys and values.
    * 
    * @param record a Record containing keys and their corresponding values
-   * @return a Source instance that retrieves values using the provided Record
+   * @returns a Source instance that retrieves values using the provided Record
    */
   createRecordSource(record: Record<string, ValueType>): RequiredType<Source>;
 
   /**
    * Creates a source that retrieves values from the process environment variables.
-   * @return a Source instance that retrieves values from the process environment variables
+   * @returns a Source instance that retrieves values from the process environment variables
    */
   createProcessSource(): RequiredType<Source>;
 }
