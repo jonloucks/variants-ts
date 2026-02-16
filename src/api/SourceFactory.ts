@@ -6,6 +6,11 @@ import { create as createContract } from "@jonloucks/contracts-ts/api/RatifiedCo
 import { Type as SupplierType } from "@jonloucks/contracts-ts/auxiliary/Supplier";
 import { guardFunctions, RequiredType, ValueType } from "@jonloucks/variants-ts/api/Types";
 
+/**
+ * The configuration for the SourceFactory contract. This interface defines the structure of the configuration object
+ * that can be passed to the SourceFactory contract during installation. It may include properties such as custom
+ * contracts or other settings that are necessary for the proper functioning of the SourceFactory.
+ */
 export interface Config {
   contracts?: Contracts;
 }
@@ -17,14 +22,43 @@ export interface Config {
  */
 export interface SourceFactory {
 
+  /**
+   * Creates a source that retrieves values based on a key and a supplier function.
+   * 
+   * @param key the key to retrieve values for
+   * @param supplier a function that supplies values based on the provided key
+   * @returns a Source instance that retrieves values using the provided key and supplier function
+   */
   createKeySource(key: string, supplier: SupplierType<ValueType>): RequiredType<Source>;
 
-  createLookupSource(lookup: (key: string) => ValueType ): RequiredType<Source>;
+  /**
+   * Creates a source that retrieves values based on a key and a lookup function.
+   * 
+   * @param lookup a function that retrieves values based on a provided key
+   * @returns a Source instance that retrieves values using the provided lookup function
+  */
+  createLookupSource(lookup: (key: string) => ValueType): RequiredType<Source>;
 
+  /**
+   * Creates a source that retrieves values based on a Map of keys and values.
+   * 
+   * @param map a Map containing keys and their corresponding values
+   * @returns a Source instance that retrieves values using the provided Map
+   */
   createMapSource(map: Map<string, ValueType>): RequiredType<Source>;
 
+  /**
+   * Creates a source that retrieves values based on a Record of keys and values.
+   * 
+   * @param record a Record containing keys and their corresponding values
+   * @returns a Source instance that retrieves values using the provided Record
+   */
   createRecordSource(record: Record<string, ValueType>): RequiredType<Source>;
 
+  /**
+   * Creates a source that retrieves values from the process environment variables.
+   * @returns a Source instance that retrieves values from the process environment variables
+   */
   createProcessSource(): RequiredType<Source>;
 }
 

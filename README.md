@@ -144,13 +144,6 @@ npm run docs
 ```
 </details>
 
-<details markdown="1"><summary>Generate variants</summary>
-
-```bash
-npm run variants
-```
-</details>
-
 <details markdown="1"><summary>Project Structure</summary>
 
 * All tests must have suffix of -test.ts or -spec.ts
@@ -159,52 +152,36 @@ npm run variants
 
 ```
 variants-ts
-├── .github
-│   ├── ISSUE_TEMPLATE
-│   │   ├── bug_report.md
-│   │   └── feature_request.md
-│   └── workflows
-│       ├── main-pull-request-matrix.yml
-│       ├── main-pull-request.yml
-│       ├── main-push.yml
-│       └── main-release.yml
+├── .github/
+│   └── workflows/
+│       ├── main-pull-request-matrix.yml
+│       ├── main-pull-request-smoke.yml
+│       ├── main-pull-request.yml
+│       ├── main-push-smoke.yml
+│       ├── main-push.yml
+│       ├── main-release-smoke.yml
+│       └── main-release.yml
 ├── CODE_OF_CONDUCT.md
 ├── CODING_STANDARDS.md
 ├── CONTRIBUTING.md
-├── editorconfig
+├── .editorconfig
 ├── eslint.config.mjs
-├── jest.config.js
 ├── LICENSE
 ├── package-lock.json
 ├── package.json
 ├── PULL_REQUEST_TEMPLATE.md
 ├── README.md
-├── scripts
-│   ├── badge-template.svg.dat
-│   └── tsconfig.json
 ├── SECURITY.md
-├── src
-│   ├── index.ts
-│   ├── version.ts
-│   ├── api
-│   │   ├── *.ts
-│   │   ├── *.api.ts
-│   ├── auxiliary
-│   │   ├── *.ts
-│   │   ├── *.impl.ts
-│   │   ├── *.test.ts    // internal implementation specific
-│   │   └── *.api.ts
-│   ├── impl
-│   │   ├── *.ts
-│   │   ├── *.impl.ts
-│   │   ├── *.test.ts    // internal implementation specific
-│   │   └── *.api.ts
-│   ├── test
-│   │   └── *.test.ts
-│   └── never-publish             // non shippable development scripts
-│       ├── *.ts
-│       ├── *.*.                  // data files etc
-│       └── *.test.ts
+├── DOCUMENTATION.md
+├── notes/
+├── src/
+│   ├── api/
+│   ├── auxiliary/
+│   ├── data/
+│   ├── impl/
+│   ├── test/
+│   ├── index.ts
+│   └── version.ts
 ├── tsconfig.json
 └── typedoc.json
 ```
@@ -215,7 +192,7 @@ variants-ts
 <details markdown="1"><summary>CI Workflow</summary>
 
 The CI workflow runs on every push and pull request to `main` branch. It:
-- Tests against Node.js versions 18.x, 20.x, 22.x, and 24.x
+- Tests against Node.js versions 16.x, 18.x, 20.x, 22.x, and 24.x
 - Runs linting
 - Builds the project
 - Runs tests with coverage
@@ -225,8 +202,8 @@ The CI workflow runs on every push and pull request to `main` branch. It:
 
 <details markdown="1"><summary>Publish Workflow</summary>
 
-The GitHub publishings workflows are run to make an official release.
-- If all scanning and tests pass it is published. There is no other way allowed.
+The publish workflow creates an official release package.
+- Publish is gated by `main-release-smoke` and runs only when the smoke matrix completes successfully.
 - Publishing authentication is done using ([OIDC trusted publishing](https://docs.npmjs.com/trusted-publishers))
 
 To set up your own publishing:

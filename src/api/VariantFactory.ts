@@ -12,8 +12,11 @@ export interface VariantFactory {
 
   /**
    * Creates a variant based on the provided configuration.
+   * 
    * @param config - The configuration for the Variant to be created.
-   * @returns A Promise that resolves to a Variant instance representing
+   * @returns A new Variant instance representing the generated variant.
+   * @throws IllegalArgumentException if the provided configuration is invalid.
+   * @throws VariantException if there is an error during variant creation.
    */
   createVariant<T>(config?: VariantConfig<T>): RequiredType<Variant<T>>;
 }

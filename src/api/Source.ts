@@ -8,6 +8,7 @@ export interface Source {
 
   /**
    * Get the source value value for a given key
+   * 
    * @param key the key to get the source value value for
    * @returns the source value value for the given key, or undefined if not found
    */
