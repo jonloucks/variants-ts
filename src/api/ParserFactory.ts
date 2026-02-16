@@ -51,8 +51,16 @@ export interface ParserFactory {
    */
   ofNumber(): Transform<OptionalType<ValueType>, OptionalType<number>>;
 
+  /**
+   * @return a parser that converts a valid text value into a BigInt instance
+   */
   bigIntParser(): Transform<RequiredType<ValueType>, RequiredType<bigint>>;
 
+  /**
+   * Input is trimmed and empty values are skipped
+   *
+   * @return a text conversion to a BigInt instance
+   */
   ofBigInt(): Transform<OptionalType<ValueType>, OptionalType<bigint>>;
 
   /**
