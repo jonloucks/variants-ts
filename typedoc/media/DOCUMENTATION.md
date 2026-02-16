@@ -3,7 +3,7 @@
 ## Overview
 Variants TS is a TypeScript configuration library that normalizes how values are retrieved from multiple sources. It provides a small set of types for building configuration variants, sources, and environments, plus factories and convenience helpers for common usage.
 
-This document is the canonical, human-friendly guide for the first release. API reference is also published via TypeDoc.
+This document is the canonical, human-friendly guide for variants-ts usage. API reference is also published via TypeDoc.
 
 - TypeDoc API reference: https://jonloucks.github.io/variants-ts/typedoc/
 - Test coverage report: https://jonloucks.github.io/variants-ts/lcov-report
@@ -169,4 +169,4 @@ const nodeEnv = env.findVariance(variant);
 
 ## Release Notes
 
-See the release notes in notes/ for version-specific changes.
+See the release notes in [notes/](notes/) for version-specific changes.
