@@ -7,7 +7,7 @@ import { createInstaller } from "@jonloucks/variants-ts";
 import { Environment } from "@jonloucks/variants-ts/api/Environment";
 import { CONTRACT as ENVIRONMENT_FACTORY_CONTRACT, EnvironmentFactory, guard } from "@jonloucks/variants-ts/api/EnvironmentFactory";
 import { Installer } from "@jonloucks/variants-ts/api/Installer";
-import { isPresent } from "../api/Types.js";
+import { isPresent } from "@jonloucks/contracts-ts/api/Types";
 import { assertContract, assertGuard, makeDuck } from "./helper.test.js";
 
 const FUNCTION_NAMES: (string | symbol)[] = [
