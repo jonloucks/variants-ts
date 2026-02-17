@@ -14,6 +14,21 @@ export function create<T>(config?: VariantConfig<T>): RequiredType<Variant<T>> {
 
 // ---- Implementation details below ----
 
+/**
+ * Transforms a required input value into a required output value.
+ * This is used when a parser function is provided in the configuration.
+ * The parser is expected to throw an error if the input value cannot be parsed,
+ * which will be handled by the caller.
+ */
+type ParserTransform<T> = Transform<RequiredType<ValueType>, RequiredType<T>>;
+
+/**
+ * Transforms an optional input value into an optional output value.
+ * This is used when a parser function is not provided in the configuration.
+ * The input value is returned as-is if it is not present.
+ */
+type OfTransform<T> = Transform<OptionalType<ValueType>, OptionalType<T>>;
+
 class VariantImpl<T> implements Variant<T> {
 
   get keys(): readonly string[] {
@@ -63,31 +78,23 @@ class VariantImpl<T> implements Variant<T> {
   readonly #description: string;
   readonly #fallback: T | undefined;
   readonly #link: Variant<T> | undefined;
-  readonly #of: Transform<OptionalType<ValueType>, OptionalType<T>>;
+  readonly #of: OfTransform<T>;
 }
 
-function compileOf<T>(config: VariantConfig<T>): Transform<OptionalType<ValueType>, OptionalType<T>> {
+function compileOf<T>(config: VariantConfig<T>): OfTransform<T> {
   if (isPresent(config.of)) {
     return fromType(config.of!)
   } else if (isPresent(config.parser)) {
-    return compileUsingParser();
-  } else {
-    return compilePassThru();
-  }
-
-  function compileUsingParser(): Transform<OptionalType<ValueType>, OptionalType<T>> {
-    const parserTransform: Transform<RequiredType<ValueType>, RequiredType<T>> = fromType(config.parser!);
+    const parseValue: ParserTransform<T> = fromType(config.parser!);
     return {
       transform: (input: OptionalType<ValueType>): OptionalType<T> => {
         if (isPresent(input)) {
-          return parserTransform.transform(input);
+          return parseValue.transform(input);
         }
         return input;
       }
     };
-  }
-
-  function compilePassThru(): Transform<OptionalType<ValueType>, OptionalType<T>> {
+  } else {
     return {
       transform: (input: OptionalType<ValueType>): OptionalType<T> => {
         return input as unknown as OptionalType<T>;
