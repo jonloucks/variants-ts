@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">98.96% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>96/97</span>
+                <span class='fraction'>104/104</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">96.96% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>32/33</span>
+                <span class='fraction'>30/30</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>16/16</span>
+                <span class='fraction'>14/14</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">98.96% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>96/97</span>
+                <span class='fraction'>104/104</span>
             </div>
         
             
@@ -159,7 +159,29 @@
 <a name='L94'></a><a href='#L94'>94</a>
 <a name='L95'></a><a href='#L95'>95</a>
 <a name='L96'></a><a href='#L96'>96</a>
-<a name='L97'></a><a href='#L97'>97</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">10x</span>
+<a name='L97'></a><a href='#L97'>97</a>
+<a name='L98'></a><a href='#L98'>98</a>
+<a name='L99'></a><a href='#L99'>99</a>
+<a name='L100'></a><a href='#L100'>100</a>
+<a name='L101'></a><a href='#L101'>101</a>
+<a name='L102'></a><a href='#L102'>102</a>
+<a name='L103'></a><a href='#L103'>103</a>
+<a name='L104'></a><a href='#L104'>104</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-yes">10x</span>
 <span class="cline-any cline-yes">10x</span>
 <span class="cline-any cline-yes">10x</span>
 <span class="cline-any cline-yes">10x</span>
@@ -232,23 +254,15 @@
 <span class="cline-any cline-yes">10x</span>
 <span class="cline-any cline-yes">118x</span>
 <span class="cline-any cline-yes">19x</span>
+<span class="cline-any cline-yes">19x</span>
+<span class="cline-any cline-yes">19x</span>
+<span class="cline-any cline-yes">17x</span>
+<span class="cline-any cline-yes">15x</span>
+<span class="cline-any cline-yes">15x</span>
+<span class="cline-any cline-yes">17x</span>
+<span class="cline-any cline-yes">17x</span>
+<span class="cline-any cline-yes">19x</span>
 <span class="cline-any cline-yes">108x</span>
-<span class="cline-any cline-yes">89x</span>
-<span class="cline-any cline-yes">89x</span>
-<span class="cline-any cline-yes">118x</span>
-<span class="cline-any cline-yes">118x</span>
-<span class="cline-any cline-yes">19x</span>
-<span class="cline-any cline-yes">19x</span>
-<span class="cline-any cline-yes">19x</span>
-<span class="cline-any cline-yes">17x</span>
-<span class="cline-any cline-yes">15x</span>
-<span class="cline-any cline-yes">15x</span>
-<span class="cline-any cline-yes">17x</span>
-<span class="cline-any cline-yes">17x</span>
-<span class="cline-any cline-yes">19x</span>
-<span class="cline-any cline-yes">19x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-yes">118x</span>
 <span class="cline-any cline-yes">89x</span>
 <span class="cline-any cline-yes">89x</span>
 <span class="cline-any cline-yes">13x</span>
@@ -270,6 +284,21 @@ export function create&lt;T&gt;(config?: VariantConfig&lt;T&gt;): RequiredType&l
 };
 &nbsp;
 // ---- Implementation details below ----
+&nbsp;
+/**
+ * Transforms a required input value into a required output value.
+ * This is used when a parser function is provided in the configuration.
+ * The parser is expected to throw an error if the input value cannot be parsed,
+ * which will be handled by the caller.
+ */
+type ParserTransform&lt;T&gt; = Transform&lt;RequiredType&lt;ValueType&gt;, RequiredType&lt;T&gt;&gt;;
+&nbsp;
+/**
+ * Transforms an optional input value into an optional output value.
+ * This is used when a parser function is not provided in the configuration.
+ * The input value is returned as-is if it is not present.
+ */
+type OfTransform&lt;T&gt; = Transform&lt;OptionalType&lt;ValueType&gt;, OptionalType&lt;T&gt;&gt;;
 &nbsp;
 class VariantImpl&lt;T&gt; implements Variant&lt;T&gt; {
 &nbsp;
@@ -320,31 +349,23 @@ class VariantImpl&lt;T&gt; implements Variant&lt;T&gt; {
   readonly #description: string;
   readonly #fallback: T | undefined;
   readonly #link: Variant&lt;T&gt; | undefined;
-  readonly #of: Transform&lt;OptionalType&lt;ValueType&gt;, OptionalType&lt;T&gt;&gt;;
+  readonly #of: OfTransform&lt;T&gt;;
 }
 &nbsp;
-function compileOf&lt;T&gt;(config: VariantConfig&lt;T&gt;): Transform&lt;OptionalType&lt;ValueType&gt;, OptionalType&lt;T&gt;&gt; {
+function compileOf&lt;T&gt;(config: VariantConfig&lt;T&gt;): OfTransform&lt;T&gt; {
   if (isPresent(config.of)) {
     return fromType(config.of!)
   } else if (isPresent(config.parser)) {
-    return compileUsingParser();
-  } else {
-    return compilePassThru();
-  }
-&nbsp;
-<span class="branch-0 cbranch-no" title="branch not covered" >  function compileUsingParser(): Transform&lt;OptionalType&lt;ValueType&gt;, OptionalType&lt;T&gt;&gt; {</span>
-    const parserTransform: Transform&lt;RequiredType&lt;ValueType&gt;, RequiredType&lt;T&gt;&gt; = fromType(config.parser!);
+    const parseValue: ParserTransform&lt;T&gt; = fromType(config.parser!);
     return {
       transform: (input: OptionalType&lt;ValueType&gt;): OptionalType&lt;T&gt; =&gt; {
         if (isPresent(input)) {
-          return parserTransform.transform(input);
+          return parseValue.transform(input);
         }
         return input;
       }
     };
-  }
-<span class="cstat-no" title="statement not covered" ></span>
-  function compilePassThru(): Transform&lt;OptionalType&lt;ValueType&gt;, OptionalType&lt;T&gt;&gt; {
+  } else {
     return {
       transform: (input: OptionalType&lt;ValueType&gt;): OptionalType&lt;T&gt; =&gt; {
         return input as unknown as OptionalType&lt;T&gt;;
@@ -358,7 +379,7 @@ function compileOf&lt;T&gt;(config: VariantConfig&lt;T&gt;): Transform&lt;Option
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-02-17T14:30:08.475Z
+                at 2026-02-17T21:27:33.375Z
             </div>
         <script src="../../prettify.js"></script>
         <script>
