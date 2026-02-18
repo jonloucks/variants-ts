@@ -1,6 +1,6 @@
 {
   "name": "@jonloucks/variants-ts",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Node.js Typescript Configuration Library, normalize how configuration is loaded from various sources is retrieved.",
   "private": true,
   "type": "module",
