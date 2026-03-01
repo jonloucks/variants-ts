@@ -10,176 +10,689 @@
     th, td { border: 1px solid #ddd; padding: 0.5em; text-align: left; }
     th { background: #f4f4f4; }
     .pct { font-weight: bold; }
+    .tooltip-cell {
+      position: relative; /* Needed for absolute positioning of the tooltip content */
+      cursor: help; /* Changes cursor to indicate interactivity */
+    }
+    .tooltip-content {
+      display: none; /* Hide the content by default */
+      position: absolute; /* Position relative to the parent cell */
+      color: blue;
+      background-color: #f9f9f9;
+      border: 1px solid #ccc;
+      padding: 10px;
+      z-index: 10; /* Ensure it appears above other elements */
+      right: 0;
+    /*  left: 100%; *//* Position to the right of the cell */
+      top: 0;
+      white-space: nowrap; /* Prevents text from wrapping (optional) */
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    .tooltip-cell:hover .tooltip-content {
+      display: block; /* Show the content on hover */
+    }
+    .th-sort-asc::after { content: " ▲"; }
+    .th-sort-desc::after { content: " ▼"; }
   </style>
 </head>
 <body>
   <h1>Coverage Report</h1>
-  <h2>Totals</h2>
-  <ul>
-    <li>Lines: <span class="pct">100%</span></li>
-    <li>Functions: <span class="pct">100%</span></li>
-    <li>Branches: <span class="pct">100%</span></li>
-  </ul>
-  <h2>Per File</h2>
-  <table>
+  <h2>Summary</h2>
+  <table id="summaryTable" width="400px">
+    <thead>
+      <tr>
+        <th>Category</th>
+        <th style="width: 120px;">Lines</th>
+        <th style="width: 120px;">Functions</th>
+        <th style="width: 120px;">Branches</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+         <td>All Files</td>
+          
+    <td class="tooltip-cell" style="color: white; background-color: #4bc124">
+      100%
+      
+    </td>
+  
+          
+    <td class="tooltip-cell" style="color: white; background-color: #4bc124">
+      100%
+      
+    </td>
+  
+          
+    <td class="tooltip-cell" style="color: white; background-color: #4bc124">
+      100%
+      
+    </td>
+  
+        </tr>
+              
+        <tr>
+          <td>src</td>
+          
+    <td class="tooltip-cell" style="color: white; background-color: #4bc124">
+      100%
+      
+    </td>
+  
+          
+    <td class="tooltip-cell" style="color: white; background-color: #4bc124">
+      100%
+      
+    </td>
+  
+          
+    <td class="tooltip-cell" style="color: white; background-color: #4bc124">
+      100%
+      
+    </td>
+  
+        </tr>
+      
+        <tr>
+          <td>src/api</td>
+          
+    <td class="tooltip-cell" style="color: white; background-color: #4bc124">
+      100%
+      
+    </td>
+  
+          
+    <td class="tooltip-cell" style="color: white; background-color: #4bc124">
+      100%
+      
+    </td>
+  
+          
+    <td class="tooltip-cell" style="color: white; background-color: #4bc124">
+      100%
+      
+    </td>
+  
+        </tr>
+      
+        <tr>
+          <td>src/auxiliary</td>
+          
+    <td class="tooltip-cell" style="color: white; background-color: #4bc124">
+      100%
+      
+    </td>
+  
+          
+    <td class="tooltip-cell" style="color: white; background-color: #4bc124">
+      100%
+      
+    </td>
+  
+          
+    <td class="tooltip-cell" style="color: white; background-color: #4bc124">
+      100%
+      
+    </td>
+  
+        </tr>
+      
+        <tr>
+          <td>src/impl</td>
+          
+    <td class="tooltip-cell" style="color: white; background-color: #4bc124">
+      100%
+      
+    </td>
+  
+          
+    <td class="tooltip-cell" style="color: white; background-color: #4bc124">
+      100%
+      
+    </td>
+  
+          
+    <td class="tooltip-cell" style="color: white; background-color: #4bc124">
+      100%
+      
+    </td>
+  
+        </tr>
+      
+    </tbody>
+  </table>
+  <h2>Coverage Per File</h2>
+  <table id="perFileTable">
     <thead>
       <tr>
         <th>File</th>
-        <th>Lines %</th>
-        <th>Functions %</th>
-        <th>Branches %</th>
+        <th>Folder</th>
+        <th style="width: 120px;">Lines</th>
+        <th style="width: 120px;">Functions</th>
+        <th style="width: 120px;">Branches</th>
       </tr>
     </thead>
     <tbody>
       
         <tr>
-          <td>src/api/Environment.ts</td>
-          <td>100%</td>
-          <td>100%</td>
-          <td>100%</td>
+          <td>Environment.ts</td>
+          <td>src/api</td>
+          
+    <td class="tooltip-cell" style="color: white; background-color: #4bc124">
+      100%
+      
+    </td>
+  
+          
+    <td class="tooltip-cell" style="color: white; background-color: #4bc124">
+      100%
+      
+    </td>
+  
+          
+    <td class="tooltip-cell" style="color: white; background-color: #4bc124">
+      100%
+      
+    </td>
+  
         </tr>
       
         <tr>
-          <td>src/api/EnvironmentFactory.ts</td>
-          <td>100%</td>
-          <td>100%</td>
-          <td>100%</td>
+          <td>EnvironmentFactory.ts</td>
+          <td>src/api</td>
+          
+    <td class="tooltip-cell" style="color: white; background-color: #4bc124">
+      100%
+      
+    </td>
+  
+          
+    <td class="tooltip-cell" style="color: white; background-color: #4bc124">
+      100%
+      
+    </td>
+  
+          
+    <td class="tooltip-cell" style="color: white; background-color: #4bc124">
+      100%
+      
+    </td>
+  
         </tr>
       
         <tr>
-          <td>src/api/ParserFactory.ts</td>
-          <td>100%</td>
-          <td>100%</td>
-          <td>100%</td>
+          <td>ParserFactory.ts</td>
+          <td>src/api</td>
+          
+    <td class="tooltip-cell" style="color: white; background-color: #4bc124">
+      100%
+      
+    </td>
+  
+          
+    <td class="tooltip-cell" style="color: white; background-color: #4bc124">
+      100%
+      
+    </td>
+  
+          
+    <td class="tooltip-cell" style="color: white; background-color: #4bc124">
+      100%
+      
+    </td>
+  
         </tr>
       
         <tr>
-          <td>src/api/Source.ts</td>
-          <td>100%</td>
-          <td>100%</td>
-          <td>100%</td>
+          <td>Source.ts</td>
+          <td>src/api</td>
+          
+    <td class="tooltip-cell" style="color: white; background-color: #4bc124">
+      100%
+      
+    </td>
+  
+          
+    <td class="tooltip-cell" style="color: white; background-color: #4bc124">
+      100%
+      
+    </td>
+  
+          
+    <td class="tooltip-cell" style="color: white; background-color: #4bc124">
+      100%
+      
+    </td>
+  
         </tr>
       
         <tr>
-          <td>src/api/SourceFactory.ts</td>
-          <td>100%</td>
-          <td>100%</td>
-          <td>100%</td>
+          <td>SourceFactory.ts</td>
+          <td>src/api</td>
+          
+    <td class="tooltip-cell" style="color: white; background-color: #4bc124">
+      100%
+      
+    </td>
+  
+          
+    <td class="tooltip-cell" style="color: white; background-color: #4bc124">
+      100%
+      
+    </td>
+  
+          
+    <td class="tooltip-cell" style="color: white; background-color: #4bc124">
+      100%
+      
+    </td>
+  
         </tr>
       
         <tr>
-          <td>src/api/Types.ts</td>
-          <td>100%</td>
-          <td>100%</td>
-          <td>100%</td>
+          <td>Types.ts</td>
+          <td>src/api</td>
+          
+    <td class="tooltip-cell" style="color: white; background-color: #4bc124">
+      100%
+      
+    </td>
+  
+          
+    <td class="tooltip-cell" style="color: white; background-color: #4bc124">
+      100%
+      
+    </td>
+  
+          
+    <td class="tooltip-cell" style="color: white; background-color: #4bc124">
+      100%
+      
+    </td>
+  
         </tr>
       
         <tr>
-          <td>src/api/Variant.ts</td>
-          <td>100%</td>
-          <td>100%</td>
-          <td>100%</td>
+          <td>Variant.ts</td>
+          <td>src/api</td>
+          
+    <td class="tooltip-cell" style="color: white; background-color: #4bc124">
+      100%
+      
+    </td>
+  
+          
+    <td class="tooltip-cell" style="color: white; background-color: #4bc124">
+      100%
+      
+    </td>
+  
+          
+    <td class="tooltip-cell" style="color: white; background-color: #4bc124">
+      100%
+      
+    </td>
+  
         </tr>
       
         <tr>
-          <td>src/api/VariantException.ts</td>
-          <td>100%</td>
-          <td>100%</td>
-          <td>100%</td>
+          <td>VariantException.ts</td>
+          <td>src/api</td>
+          
+    <td class="tooltip-cell" style="color: white; background-color: #4bc124">
+      100%
+      
+    </td>
+  
+          
+    <td class="tooltip-cell" style="color: white; background-color: #4bc124">
+      100%
+      
+    </td>
+  
+          
+    <td class="tooltip-cell" style="color: white; background-color: #4bc124">
+      100%
+      
+    </td>
+  
         </tr>
       
         <tr>
-          <td>src/api/VariantFactory.ts</td>
-          <td>100%</td>
-          <td>100%</td>
-          <td>100%</td>
+          <td>VariantFactory.ts</td>
+          <td>src/api</td>
+          
+    <td class="tooltip-cell" style="color: white; background-color: #4bc124">
+      100%
+      
+    </td>
+  
+          
+    <td class="tooltip-cell" style="color: white; background-color: #4bc124">
+      100%
+      
+    </td>
+  
+          
+    <td class="tooltip-cell" style="color: white; background-color: #4bc124">
+      100%
+      
+    </td>
+  
         </tr>
       
         <tr>
-          <td>src/auxiliary/Checks.ts</td>
-          <td>100%</td>
-          <td>100%</td>
-          <td>100%</td>
+          <td>Checks.ts</td>
+          <td>src/auxiliary</td>
+          
+    <td class="tooltip-cell" style="color: white; background-color: #4bc124">
+      100%
+      
+    </td>
+  
+          
+    <td class="tooltip-cell" style="color: white; background-color: #4bc124">
+      100%
+      
+    </td>
+  
+          
+    <td class="tooltip-cell" style="color: white; background-color: #4bc124">
+      100%
+      
+    </td>
+  
         </tr>
       
         <tr>
-          <td>src/auxiliary/Convenience.ts</td>
-          <td>100%</td>
-          <td>100%</td>
-          <td>100%</td>
+          <td>Convenience.ts</td>
+          <td>src/auxiliary</td>
+          
+    <td class="tooltip-cell" style="color: white; background-color: #4bc124">
+      100%
+      
+    </td>
+  
+          
+    <td class="tooltip-cell" style="color: white; background-color: #4bc124">
+      100%
+      
+    </td>
+  
+          
+    <td class="tooltip-cell" style="color: white; background-color: #4bc124">
+      100%
+      
+    </td>
+  
         </tr>
       
         <tr>
-          <td>src/impl/Environment.impl.ts</td>
-          <td>100%</td>
-          <td>100%</td>
-          <td>100%</td>
+          <td>Environment.impl.ts</td>
+          <td>src/impl</td>
+          
+    <td class="tooltip-cell" style="color: white; background-color: #4bc124">
+      100%
+      
+    </td>
+  
+          
+    <td class="tooltip-cell" style="color: white; background-color: #4bc124">
+      100%
+      
+    </td>
+  
+          
+    <td class="tooltip-cell" style="color: white; background-color: #4bc124">
+      100%
+      
+    </td>
+  
         </tr>
       
         <tr>
-          <td>src/impl/EnvironmentFactory.impl.ts</td>
-          <td>100%</td>
-          <td>100%</td>
-          <td>100%</td>
+          <td>EnvironmentFactory.impl.ts</td>
+          <td>src/impl</td>
+          
+    <td class="tooltip-cell" style="color: white; background-color: #4bc124">
+      100%
+      
+    </td>
+  
+          
+    <td class="tooltip-cell" style="color: white; background-color: #4bc124">
+      100%
+      
+    </td>
+  
+          
+    <td class="tooltip-cell" style="color: white; background-color: #4bc124">
+      100%
+      
+    </td>
+  
         </tr>
       
         <tr>
-          <td>src/impl/Installer.impl.ts</td>
-          <td>100%</td>
-          <td>100%</td>
-          <td>100%</td>
+          <td>Installer.impl.ts</td>
+          <td>src/impl</td>
+          
+    <td class="tooltip-cell" style="color: white; background-color: #4bc124">
+      100%
+      
+    </td>
+  
+          
+    <td class="tooltip-cell" style="color: white; background-color: #4bc124">
+      100%
+      
+    </td>
+  
+          
+    <td class="tooltip-cell" style="color: white; background-color: #4bc124">
+      100%
+      
+    </td>
+  
         </tr>
       
         <tr>
-          <td>src/impl/Internal.impl.ts</td>
-          <td>100%</td>
-          <td>100%</td>
-          <td>100%</td>
+          <td>Internal.impl.ts</td>
+          <td>src/impl</td>
+          
+    <td class="tooltip-cell" style="color: white; background-color: #4bc124">
+      100%
+      
+    </td>
+  
+          
+    <td class="tooltip-cell" style="color: white; background-color: #4bc124">
+      100%
+      
+    </td>
+  
+          
+    <td class="tooltip-cell" style="color: white; background-color: #4bc124">
+      100%
+      
+    </td>
+  
         </tr>
       
         <tr>
-          <td>src/impl/ParserFactory.impl.ts</td>
-          <td>100%</td>
-          <td>100%</td>
-          <td>100%</td>
+          <td>ParserFactory.impl.ts</td>
+          <td>src/impl</td>
+          
+    <td class="tooltip-cell" style="color: white; background-color: #4bc124">
+      100%
+      
+    </td>
+  
+          
+    <td class="tooltip-cell" style="color: white; background-color: #4bc124">
+      100%
+      
+    </td>
+  
+          
+    <td class="tooltip-cell" style="color: white; background-color: #4bc124">
+      100%
+      
+    </td>
+  
         </tr>
       
         <tr>
-          <td>src/impl/SourceFactory.impl.ts</td>
-          <td>100%</td>
-          <td>100%</td>
-          <td>100%</td>
+          <td>SourceFactory.impl.ts</td>
+          <td>src/impl</td>
+          
+    <td class="tooltip-cell" style="color: white; background-color: #4bc124">
+      100%
+      
+    </td>
+  
+          
+    <td class="tooltip-cell" style="color: white; background-color: #4bc124">
+      100%
+      
+    </td>
+  
+          
+    <td class="tooltip-cell" style="color: white; background-color: #4bc124">
+      100%
+      
+    </td>
+  
         </tr>
       
         <tr>
-          <td>src/impl/Variant.impl.ts</td>
-          <td>100%</td>
-          <td>100%</td>
-          <td>100%</td>
+          <td>Variant.impl.ts</td>
+          <td>src/impl</td>
+          
+    <td class="tooltip-cell" style="color: white; background-color: #4bc124">
+      100%
+      
+    </td>
+  
+          
+    <td class="tooltip-cell" style="color: white; background-color: #4bc124">
+      100%
+      
+    </td>
+  
+          
+    <td class="tooltip-cell" style="color: white; background-color: #4bc124">
+      100%
+      
+    </td>
+  
         </tr>
       
         <tr>
-          <td>src/impl/VariantFactory.impl.ts</td>
-          <td>100%</td>
-          <td>100%</td>
-          <td>100%</td>
+          <td>VariantFactory.impl.ts</td>
+          <td>src/impl</td>
+          
+    <td class="tooltip-cell" style="color: white; background-color: #4bc124">
+      100%
+      
+    </td>
+  
+          
+    <td class="tooltip-cell" style="color: white; background-color: #4bc124">
+      100%
+      
+    </td>
+  
+          
+    <td class="tooltip-cell" style="color: white; background-color: #4bc124">
+      100%
+      
+    </td>
+  
         </tr>
       
         <tr>
-          <td>src/index.ts</td>
-          <td>100%</td>
-          <td>100%</td>
-          <td>100%</td>
+          <td>index.ts</td>
+          <td>src</td>
+          
+    <td class="tooltip-cell" style="color: white; background-color: #4bc124">
+      100%
+      
+    </td>
+  
+          
+    <td class="tooltip-cell" style="color: white; background-color: #4bc124">
+      100%
+      
+    </td>
+  
+          
+    <td class="tooltip-cell" style="color: white; background-color: #4bc124">
+      100%
+      
+    </td>
+  
         </tr>
       
         <tr>
-          <td>src/version.ts</td>
-          <td>100%</td>
-          <td>100%</td>
-          <td>100%</td>
+          <td>version.ts</td>
+          <td>src</td>
+          
+    <td class="tooltip-cell" style="color: white; background-color: #4bc124">
+      100%
+      
+    </td>
+  
+          
+    <td class="tooltip-cell" style="color: white; background-color: #4bc124">
+      100%
+      
+    </td>
+  
+          
+    <td class="tooltip-cell" style="color: white; background-color: #4bc124">
+      100%
+      
+    </td>
+  
         </tr>
       
     </tbody>
   </table>
 </body>
+<script>
+document.querySelectorAll('#perFileTable th').forEach((headerCell, index) => {
+    headerCell.addEventListener('click', () => {
+        const tableElement = headerCell.parentElement.parentElement.parentElement;
+        const headerRow = headerCell.parentElement;
+        const tableBody = tableElement.querySelector('tbody');
+        const rows = Array.from(tableBody.querySelectorAll('tr'));
+
+        // Toggle sort direction
+        const isAscending = headerCell.classList.contains('th-sort-asc');
+        
+        // Remove existing sort classes from all headers
+        headerRow.querySelectorAll('th').forEach(th => th.classList.remove('th-sort-asc', 'th-sort-desc'));
+
+        // Sort the rows
+        const sortedRows = rows.sort((a, b) => {
+            const aText = a.cells[index].textContent.trim();
+            const bText = b.cells[index].textContent.trim();
+            
+            // numeric: true handles both "10" > "2" and alphabetical sorting
+            return aText.localeCompare(bText, undefined, { numeric: true }) * (isAscending ? -1 : 1);
+        });
+
+        // Re-add rows to the body in new order
+        tableBody.append(...sortedRows);
+
+        // Update classes for visual indicators
+        headerCell.classList.toggle('th-sort-asc', !isAscending);
+        headerCell.classList.toggle('th-sort-desc', isAscending);
+    });
+});
+window.addEventListener('DOMContentLoaded', () => {
+    // Target the 1st header (index 0) and click it automatically
+    document.querySelectorAll('#perFileTable th')[0].click();
+});
+</script>
 </html>
