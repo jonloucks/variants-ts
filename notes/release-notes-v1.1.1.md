@@ -4,7 +4,7 @@ npm install @jonloucks/variants-ts@1.1.1
 ```
 
 ## Customer impact
-*  Dependency updates
+*  Version bump only
 
 ## Forked Repositories Impact
 *  None
