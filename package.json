@@ -75,7 +75,7 @@
     "node": ">=16.0.0"
   },
   "overrides": {
-    "minimatch": "10.2.1"
+    "minimatch": ">=10.2.4 <11.0.0"
   },
   "devDependencies": {
     "@jonloucks/badges-ts": "^1.4.3",
