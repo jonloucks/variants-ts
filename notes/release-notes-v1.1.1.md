@@ -2,7 +2,6 @@
 ```bash
 npm install @jonloucks/variants-ts@1.1.1
 ```
-Dependency updates
 
 ## Customer impact
 *  Version bump only
